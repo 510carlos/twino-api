@@ -1,0 +1,19 @@
+{
+  "name": "twino-api",
+  "version": "1.0.0",
+  "author": "Carlos Mendoza",
+  "main": "index.js",
+  "type": "module",
+  "license": "MIT",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "uuid": "^8.3.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  }
+}
