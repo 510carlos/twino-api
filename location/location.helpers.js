@@ -1,37 +1,86 @@
 import { v4 as uuid } from 'uuid';
-
-let locations = [];
+import { dbConnect } from "../app/database.js"
 
 const getLocations = (req, res) => {
-    console.log("Get location from db");
-    res.send(locations);
+    let statment = `SELECT * FROM locations`;
+
+    dbConnect({
+        statment
+    }, function(err, results){
+        res.send(results);
+    });
+
 }
 
 const createLocation = (req, res) => {
-    console.log("Creating new location")
+    const body = req.body;
+    
+    let data = {
+        id: uuid(),
+        drink: body.drink,
+        zone: body.zone,
+        country: body.country,
+        city: body.city,
+        note: body.note
+    }
 
-    locations.push({...locations, id: uuid()});
+    let statment = `INSERT INTO locations (id, drink, zone, country, city, note) 
+                VALUES (?,?,?,?,?,?)`;
+    let values = [data.id, data.drink, data.zone, data.country, data.city, data.note];
+    
+    dbConnect({
+        statment,
+        values
+    }, function(err, results){
+        res.send(data);
+    });
 } 
 
 const getLocation = (req, res) => {
-    console.log("getting a single location");
-
-    res.send(req.params.id);
+    let statment = `SELECT * FROM locations WHERE id=?`;
+    let values = [req.params.id];
+    dbConnect({
+        statment,
+        values
+    }, function(err, results){
+        res.send(results[0]);
+    });
 }
 
 const deleteLocation = (req, res) => {
-    console.log("deleting a location")
-
-    // users = locations.filter((location) => location.id !== req.params.id);
+    let statment = `DELETE FROM locations WHERE id = ?`;
+    let values = [req.params.id];
+    dbConnect({
+        statment,
+        values
+    }, function(err, results){
+        res.send(results);
+    });
 };
 
 const updateLocation = (req, res) => {
-    const user = locations.find((location) => location.id === req.params.id);
+    const body = req.body;
 
-    // user.username = req.body.username;
-    // user.age = req.body.age;
+    let data = {
+        id: body.id,
+        drink: body.drink,
+        zone: body.zone,
+        country: body.country,
+        city: body.city,
+        note: body.note
+    }
 
-    console.log("updating location")
+    let statment = `UPDATE locations
+           SET drink = ?, zone = ?, country = ?, city = ?, note = ?
+           WHERE id = ?`;
+    let values = [data.drink, data.zone, data.country, data.city, data.note, data.id];
+
+    dbConnect({
+        statment,
+        values
+    }, function(err, results){
+        res.send(results);
+    });
 }
 
 export { getLocations, createLocation, getLocation, deleteLocation, updateLocation };
