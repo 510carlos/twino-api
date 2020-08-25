@@ -12,10 +12,10 @@ const PORT = process.env.APP_PORT;
 
 app.use(bodyParser.json());
 
-app.use("/location", locationRouter);
-app.get("/", (req, res) => 
-    res.send("welcome to the  API")
-);
+app.use("/", locationRouter);
+// app.get("/", (req, res) => 
+//     res.send("welcome to the  API")
+// );
 
 app.listen(PORT, () => 
     console.log(`Server running on port: http://localhost:${PORT}`)
