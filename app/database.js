@@ -11,22 +11,29 @@ const config = {
 };
 
 export const dbConnect = (params, callback) => {
+    try {
 
-    let connection = mysql.createConnection(config);
-    connection.connect();
+    
+        let connection = mysql.createConnection(config);
+        connection.connect();
 
-    if(params.hasOwnProperty('values')) {
-        connection.query(params.statment, params.values, (err, results, fields) => {
-            if (err) return console.error(err.message);
-            console.log(results);
-            callback(err, results);
-        });
-        
-    } else {
-        connection.query(params.statment, function (error, results, fields) {
-            if (error) return console.error(error.message);
-            callback(error, results);
-        });
+        if(params.hasOwnProperty('values')) {
+            connection.query(params.statment, params.values, (err, results, fields) => {
+                if (err) return console.error(err.message);
+                console.log(results);
+                callback(err, results);
+            });
+            
+        } else {
+            connection.query(params.statment, function (error, results, fields) {
+                if (error) return console.error(error.message);
+                callback(error, results);
+            });
+        }
+        connection.end();
+    } catch(e) {
+        console.log(e)
+        connection.end();
     }
-    connection.end();
+    
 };
