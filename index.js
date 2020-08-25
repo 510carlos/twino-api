@@ -13,11 +13,11 @@ const PORT = process.env.APP_PORT;
 
 app.use(bodyParser.json());
 
-app.use("/test", (req, res) => 
-    res.send("this is a test: "+process.env.APP_PORT)
-);
+app.use("/test", getLocations);
 app.use("/location", locationRouter);
-app.get("/", getLocations);
+app.get("/", (req, res) => 
+    res.send("this is a test: ")
+);
 
 app.listen(PORT, () => 
     console.log(`Server running on port: http://localhost:${PORT}`)
