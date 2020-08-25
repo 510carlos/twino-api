@@ -1,7 +1,7 @@
 import { v4 as uuid } from 'uuid';
 import { dbConnect } from "../app/database.js"
 
-const getLocations = (req, res) => {
+export const getLocations = (req, res) => {
     let statment = `SELECT * FROM locations`;
 
     dbConnect({
