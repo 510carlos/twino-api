@@ -20,10 +20,11 @@ const configSocket = {
 
 export const dbConnect = (params, callback) => {
     try {
+        let connection;
         if(process.env.DB_HOST) 
-            let connection = mysql.createConnection(config);
+            connection = mysql.createConnection(config);
         else
-            let connection = mysql.createConnection(configSocket);
+            connection = mysql.createConnection(configSocket);
 
         connection.connect(function(err) {
             if (err) throw err;
