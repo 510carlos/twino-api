@@ -24,7 +24,7 @@ export const dbConnect = (params, callback) => {
         
     } else {
         connection.query(params.statment, function (error, results, fields) {
-            if (error) return console.error(err.message);
+            if (error) return console.error(error.message);
             callback(error, results);
         });
     }
