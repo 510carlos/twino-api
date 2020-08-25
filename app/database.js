@@ -12,10 +12,10 @@ const config = {
 
 export const dbConnect = (params, callback) => {
     try {
-
-    
         let connection = mysql.createConnection(config);
-        connection.connect();
+        connection.connect(function(err) {
+            if (err) throw err;
+        });
 
         if(params.hasOwnProperty('values')) {
             connection.query(params.statment, params.values, (err, results, fields) => {
@@ -32,8 +32,9 @@ export const dbConnect = (params, callback) => {
         }
         connection.end();
     } catch(e) {
-        console.log(e)
         connection.end();
+        console.error(e)
+        throw new UserException('DB error');
     }
     
 };
