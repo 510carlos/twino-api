@@ -10,9 +10,21 @@ const config = {
     database: process.env.DB_NAME
 };
 
+const configSocket = {
+    user: process.env.DB_USER,
+    password: process.env.DB_PASS,
+    database: process.env.DB_NAME,
+    socketPath: process.env.DB_SOCKET_PATH
+};
+
+
 export const dbConnect = (params, callback) => {
     try {
-        let connection = mysql.createConnection(config);
+        if(process.env.DB_HOST) 
+            let connection = mysql.createConnection(config);
+        else
+            let connection = mysql.createConnection(configSocket);
+
         connection.connect(function(err) {
             if (err) throw err;
         });
