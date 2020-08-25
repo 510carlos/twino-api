@@ -14,7 +14,7 @@ const PORT = process.env.APP_PORT;
 app.use(bodyParser.json());
 
 app.use("/test", (req, res) => 
-    res.send("this is a test")
+    res.send("this is a test: "+process.env.APP_PORT)
 );
 app.use("/location", locationRouter);
 app.get("/", getLocations);
