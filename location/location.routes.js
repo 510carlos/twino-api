@@ -5,7 +5,8 @@ import {
     createLocation, 
     getLocation, 
     deleteLocation, 
-    updateLocation
+    updateLocation,
+    addDataToDB
 } from './location.helpers.js';
 
 const router = express.Router();

@@ -33,14 +33,13 @@ export const dbConnect = (params, callback) => {
         if(params.hasOwnProperty('values')) {
             connection.query(params.statment, params.values, (err, results, fields) => {
                 if (err) return console.error(err.message);
-                console.log(results);
-                callback(err, results);
+                return callback(err, results);
             });
             
         } else {
             connection.query(params.statment, function (error, results, fields) {
                 if (error) return console.error(error.message);
-                callback(error, results);
+                return callback(error, results);
             });
         }
         connection.end();

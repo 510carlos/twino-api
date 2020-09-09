@@ -1,5 +1,40 @@
 import { v4 as uuid } from 'uuid';
 import { dbConnect } from "../app/database.js"
+import { supportedCities } from './location.fixtures.js';
+
+const addDataToDB = (req, res) => {
+    // console.log("addDataToDB");
+
+    res.send([]);
+
+    for(var i = 0; i < supportedCities.length; i++) {
+        // console.log(i);
+        const body = supportedCities[i];
+        let data = {
+            id: uuid(),
+            drink: body["drink"],
+            zone: body["timezone"],
+            country: body["country"],
+            city: body["city"],
+            note: body["note"]
+        }
+        let statment = `INSERT INTO locations (id, drink, zone, country, city, note) 
+                VALUES (?,?,?,?,?,?)`;
+        let values = [data.id, data.drink, data.zone, data.country, data.city, data.note];
+
+        // console.log(values);
+        dbConnect({
+            statment,
+            values
+        }, function(err, results){
+            // res.send(data);
+            console.log(data);
+        });
+
+        // break;
+    }
+    res.send([]);
+};
 
 const getLocations = (req, res) => {
     let statment = `SELECT * FROM locations`;
@@ -83,4 +118,4 @@ const updateLocation = (req, res) => {
     });
 }
 
-export { getLocations, createLocation, getLocation, deleteLocation, updateLocation };
+export { addDataToDB, getLocations, createLocation, getLocation, deleteLocation, updateLocation };
