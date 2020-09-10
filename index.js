@@ -23,9 +23,9 @@ app.use(cookieSession({
 app.use(bodyParser.json());
 
 passport.use(new GoogleStrategy.Strategy({
-    clientID: "265948777768-3u6d1h9kd31v0a2lpdbkaudpilrq6hgq.apps.googleusercontent.com",
-    clientSecret: "zCCOhuJJhqDgr6KnJNoXlTd8",
-    callbackURL: "http://localhost:5000/api/user/callback"
+    clientID: process.env.G_OAUTH_CLIENT_ID,
+    clientSecret: process.env.G_OAUTH_CLIENT_SECRET,
+    callbackURL: process.env.G_OAUTH_CLIENT_SECRET
   },
   function(accessToken, refreshToken, profile, done) {
     /*
