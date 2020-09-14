@@ -44,7 +44,7 @@ userRouter.get("/google", passport.authenticate('google', {scope: ['profile', 'e
 
 userRouter.get("/callback", passport.authenticate('google', { failureRedirect: '/failed' }),
     function(req, res) {
-    res.redirect(`${process.env.FRONTEND_URL}/admin/location`);
+    res.redirect(`${process.env.G_OAUTH_CALLBACK_URL}`);
     }
 );
 

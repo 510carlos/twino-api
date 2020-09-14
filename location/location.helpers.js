@@ -6,6 +6,7 @@ const addDataToDB = (req, res) => {
     // console.log("addDataToDB");
 
     res.send([]);
+    return 0;
 
     for(var i = 0; i < supportedCities.length; i++) {
         // console.log(i);
@@ -16,11 +17,12 @@ const addDataToDB = (req, res) => {
             zone: body["timezone"],
             country: body["country"],
             city: body["city"],
-            note: body["note"]
+            note: body["note"],
+            name: body["name"]
         }
-        let statment = `INSERT INTO locations (id, drink, zone, country, city, note) 
-                VALUES (?,?,?,?,?,?)`;
-        let values = [data.id, data.drink, data.zone, data.country, data.city, data.note];
+        let statment = `INSERT INTO locations (id, name, drink, zone, country, city, note) 
+                VALUES (?,?,?,?,?,?,?)`;
+        let values = [data.id, data.name, data.drink, data.zone, data.country, data.city, data.note];
 
         // console.log(values);
         dbConnect({

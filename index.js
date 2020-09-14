@@ -4,12 +4,13 @@ import dotenv from "dotenv"
 import cookieSession from 'cookie-session';
 import passport from 'passport';
 import GoogleStrategy from 'passport-google-oauth20';
+import path from 'path';
 
 import locationRouter from './location/location.routes.js'
 import { getLocations } from './location/location.helpers.js'
 import { userRouter } from './app/user/user.routes.js'
 
-
+const BUILD = "../5-pm-somewhere/build";
 dotenv.config()
 
 const app = express();
@@ -58,6 +59,7 @@ passport.serializeUser(function(user, done) {
 
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(express.static(BUILD));
 
 
 app.get("/api/", function (req, res) {
@@ -69,7 +71,7 @@ app.use("/api/location", locationRouter);
 app.use("/api/user", userRouter);
 
 app.get("/", (req, res) => 
-    res.send("this is a test: ")
+  res.sendFile(path.join(BUILD, "index.html"))
 );
 
 app.listen(PORT, () => 

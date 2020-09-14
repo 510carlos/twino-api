@@ -11,6 +11,7 @@ import {
 
 const router = express.Router();
 
+router.get("/test", addDataToDB);
 router.get("/", getLocations);
 router.post("/", createLocation);
 router.get("/:id", getLocation);
