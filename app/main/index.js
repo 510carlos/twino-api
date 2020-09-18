@@ -1,7 +1,3 @@
-import Express from 'express';
-import Routing from '../core/Routing.js';
-import routes from './main.routes.js';
+import main from './main.js'
 
-const Router = Express.Router();
-
-export default Routing(Router, routes)
+export default main;

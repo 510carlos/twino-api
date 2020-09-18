@@ -1,8 +1,8 @@
 import { URL_BASE } from '../utilities/constants.js';
-import router from './location.router.js'
+import locationRouter from './location.router.js'
 
 const locationRoutes = (app) => {
-    app.use(`${URL_BASE}/location`, router);
+    app.use(`${URL_BASE}/location`, locationRouter);
     return app;
 }
 

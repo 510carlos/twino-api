@@ -1,27 +1,17 @@
 import { v4 as uuid } from 'uuid';
-import {query} from '../utilities/database.js'
+import {dbQuery} from '../utilities/database.js';
 
-// const getPromise = async () => {
-//   let promise = new Promise((resolve, reject) => {
-//       setTimeout(() => resolve("done!"), 1000)
-//     });
-
-//   let result = await promise;
-
-//   return result;
-// }
-
-const getAllLocations = async () => {
+export const getAllLocations = async () => {
   let statement = `SELECT * FROM locations`;
 
-  let result = await query({
+  let result = await dbQuery({
     statement
   });
 
   return result;
 }
 
-const insertLocation = async (body) => {
+export const insertLocation = async (body) => {
   let data = {
     id: uuid(),
     drink: body.drink,
@@ -34,7 +24,7 @@ const insertLocation = async (body) => {
   let statement = `INSERT INTO locations (id, drink, zone, country, city, note) 
                 VALUES (?,?,?,?,?,?)`;
   let values = [data.id, data.drink, data.zone, data.country, data.city, data.note];
-  let result = await query({
+  let result = await dbQuery({
     statement,
     values
   });
@@ -42,10 +32,10 @@ const insertLocation = async (body) => {
   return result
 }
 
-const getLocation = async (locationID) => {
+export const getLocation = async (locationID) => {
   const statement = `SELECT * FROM locations WHERE id=?`;
   const values = [locationID];
-  let result = await query({
+  let result = await dbQuery({
     statement,
     values
   });
@@ -53,10 +43,10 @@ const getLocation = async (locationID) => {
   return result;
 }
 
-const deleteLocation = async (locationID) => {
+export const deleteLocation = async (locationID) => {
   let statement = `DELETE FROM locations WHERE id = ?`;
   let values = [locationID];
-  let result = await query({
+  let result = await dbQuery({
     statement,
     values
   });
@@ -64,7 +54,7 @@ const deleteLocation = async (locationID) => {
   return result;
 }
 
-const patchLocation = async (body) => {
+export const patchLocation = async (body) => {
   let data = {
     id: body.id,
     drink: body.drink,
@@ -79,13 +69,10 @@ const patchLocation = async (body) => {
         WHERE id = ?`;
   let values = [data.drink, data.zone, data.country, data.city, data.note, data.id];
 
-  let result = await query({
+  let result = await dbQuery({
     statement,
     values
   });
 
   return result;
-
 }
-
-export { getAllLocations, insertLocation, getLocation, deleteLocation, patchLocation };

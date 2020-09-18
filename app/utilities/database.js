@@ -1,23 +1,28 @@
-import dotenv from "dotenv"
 import mysql from 'mysql2';
 
-dotenv.config()
+import {
+    DB_USER,
+    DB_PASS,
+    DB_HOST,
+    DB_NAME,
+    DB_SOCKET_PATH
+} from './constants.js'
 
 const config = {
-    user: process.env.DB_USER,
-    password: process.env.DB_PASS,
-    host: process.env.DB_HOST,
-    database: process.env.DB_NAME
+    user: DB_USER,
+    password: DB_PASS,
+    host: DB_HOST,
+    database: DB_NAME
 };
 
 const configSocket = {
-    user: process.env.DB_USER,
-    password: process.env.DB_PASS,
-    database: process.env.DB_NAME,
-    socketPath: process.env.DB_SOCKET_PATH
+    user: DB_USER,
+    password: DB_PASS,
+    database: DB_NAME,
+    socketPath: DB_SOCKET_PATH
 };
 
-export const query = async (params) => {
+export const dbQuery = async (params) => {
     let pool;
     if(process.env.DB_HOST) 
         pool = mysql.createPool(config);

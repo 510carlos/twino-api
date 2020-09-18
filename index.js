@@ -1,4 +1,4 @@
-import app from './app2/app.js';
+import app from './app/app.js';
 
 app();
 
