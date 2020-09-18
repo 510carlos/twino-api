@@ -1,5 +1,5 @@
 import { v4 as uuid } from 'uuid';
-import { dbConnect } from "../app/database.js"
+import { dbConnect } from "../database.js"
 import { supportedCities } from './location.fixtures.js';
 
 const addDataToDB = (req, res) => {

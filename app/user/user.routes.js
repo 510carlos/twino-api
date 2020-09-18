@@ -42,9 +42,10 @@ userRouter.get("/user", function (req, res) {
 
 userRouter.get("/google", passport.authenticate('google', {scope: ['profile', 'email']}));
 
-userRouter.get("/callback", passport.authenticate('google', { failureRedirect: '/failed' }),
+userRouter.get("/callback", 
+    passport.authenticate('google', { failureRedirect: '/failed' }),
     function(req, res) {
-    res.redirect(`${process.env.G_OAUTH_CALLBACK_URL}`);
+        res.redirect(`${process.env.G_OAUTH_CALLBACK_URL}`);
     }
 );
 
