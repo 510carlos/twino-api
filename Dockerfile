@@ -9,12 +9,16 @@ WORKDIR /usr/src/app
 # A wildcard is used to ensure both package.json AND package-lock.json are copied.
 # Copying this separately prevents re-running npm install on every code change.
 COPY package*.json ./
+COPY client/package*.json ./client/
+COPY server/package*.json ./server/
 
 # Install production dependencies.
-RUN npm run build
+RUN npm run install
 
 # Copy local code to the container image.
 COPY . ./
+
+RUN npm run build
 
 # Run the web service on container startup.
 CMD [ "npm", "start" ]

@@ -5,8 +5,11 @@
   "scripts": {
     "start": "cd server && node index.js",
     "build:server": "cd server && npm install && node index.js &",
-    "build:client": "cd client && npm install && npm run build",
-    "build": "npm run build:client && npm run build:server"
+    "build:client": "ls && cd client && ls && npm install && npm run build",
+    "build": "cd client && npm run build",
+    "install:client": "ls && cd client && ls && npm install",
+    "install:server": "ls && cd server && ls && npm install",
+    "install": "npm run install:client && npm run install:server"
   },
   "author": "Carlos Mendoza"
 }
