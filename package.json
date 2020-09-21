@@ -3,7 +3,10 @@
   "version": "1.0.0",
   "description": "It is 5 o'clock somewhere. ",
   "scripts": {
-    "start": "cd server && node index.js"
+    "start": "cd server && node index.js",
+    "build:server": "cd server && yarn && node index.js &",
+    "build:client": "cd client && yarn && yarn build",
+    "build": "yarn build:client && yarn build:server"
   },
   "author": "Carlos Mendoza"
 }
