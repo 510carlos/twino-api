@@ -1,0 +1,12 @@
+version: '3.7'
+services:
+  sample:
+    container_name: 5pm-countdown
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - '.:/app'
+      - '/app/node_modules'
+    ports:
+      - 8080:8080
