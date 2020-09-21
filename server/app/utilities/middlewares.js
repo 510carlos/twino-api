@@ -6,6 +6,7 @@ import {
     G_OAUTH_CLIENT_SECRET
 } from './constants.js';
 
+import path from 'path';
 import bodyParser from "body-parser";
 import cookieSession from 'cookie-session';
 import passport from 'passport';
@@ -44,7 +45,7 @@ const middlewares = (app) => {
     app.use(passport.initialize());
     app.use(passport.session());
 
-    app.use(express.static(STATIC_PATH));
+    app.use(express.static(path.resolve(path.join(`../client/build`))));
 
     app.listen(PORT, () => 
         console.log(`Server running on port: http://localhost:${PORT}`)
