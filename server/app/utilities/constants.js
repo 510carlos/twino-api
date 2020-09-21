@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 dotenv.config();
 
 export const URL_BASE = "/api";
-export const STATIC_PATH = process.env.STATIC_PATH;
+export const RELALTIVE_BUILD_PATH = `../client/build`;
 export const PORT = process.env.APP_PORT;
 
 export const G_OAUTH_CALLBACK_URL = process.env.G_OAUTH_CALLBACK_URL;

@@ -1,5 +1,5 @@
 import {
-    STATIC_PATH,
+    RELALTIVE_BUILD_PATH,
     PORT,
     G_OAUTH_CALLBACK_URL,
     G_OAUTH_CLIENT_ID,
@@ -45,7 +45,7 @@ const middlewares = (app) => {
     app.use(passport.initialize());
     app.use(passport.session());
 
-    app.use(express.static(path.resolve(path.join(`../client/build`))));
+    app.use(express.static(path.resolve(path.join(RELALTIVE_BUILD_PATH))));
 
     app.listen(PORT, () => 
         console.log(`Server running on port: http://localhost:${PORT}`)
