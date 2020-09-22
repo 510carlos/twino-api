@@ -78,18 +78,19 @@ export const getLocation = async () => {
     }
     if(!supportedCities) return fallbackInfo;
     var names = spacetime.whereIts("5:00pm");
-    var validNames = validateZoneNames(names)
-    let listOfCities = supportedCities.map(city => city.name);
+    var validNames = validateZoneNames(names);
 
-    if(listOfCities.length === 0)
+    const listOfCities = supportedCities.map(city => city.name);
+    const citynames = listOfCities.filter(value => validNames.includes(value));
+
+    if(citynames.length === 0) {
         console.error({
             names,
             validNames
         })
-    
-    const citynames = listOfCities.filter(value => validNames.includes(value));
+    }
+
     const cityname = citynames[Math.floor(Math.random() * citynames.length)];
-    
     var zoneInformation = supportedCities.filter(value => value.name === cityname)[0];
 
     var { city, country, drink, note } = { ...fallbackInfo, ...zoneInformation };

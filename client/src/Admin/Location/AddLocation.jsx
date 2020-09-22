@@ -9,9 +9,10 @@ const AddLocation = (props) => {
     const [form] = Form.useForm();
 
     const onFinish = values => {
-        const {zone, drink, country, city, note} = values;
+        const {zone, name, drink, country, city, note} = values;
         const addRow = {
             zone,
+            name,
             drink,
             country,
             city,
@@ -33,6 +34,9 @@ const AddLocation = (props) => {
         >
           <Form.Item name="zone" label="Zone">
             <Input placeholder="GMT Zone (-12)" />
+          </Form.Item>
+          <Form.Item name="name" label="Name">
+            <Input placeholder="Name of zone" />
           </Form.Item>
           <Form.Item name="drink" label="Drink">
             <Input placeholder="Name of Drink" />
