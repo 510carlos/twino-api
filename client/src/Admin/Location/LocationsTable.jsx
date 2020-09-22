@@ -119,6 +119,13 @@ const LocationsTable = () => {
       sortDirections: ['descend', 'ascend']
     },
     {
+      title: 'Name',
+      dataIndex: 'name',
+      editable: true,
+      sorter: (a, b) => a.name - b.name,
+      sortDirections: ['descend', 'ascend']
+    },
+    {
       title: 'drink',
       dataIndex: 'drink',
       editable: true,
@@ -203,7 +210,6 @@ const LocationsTable = () => {
   });
 
   let data = [...locationList];
-
   return (
     <>
       <AddLocation 

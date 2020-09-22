@@ -58,7 +58,7 @@ function Countdown() {
                 subsets={['cyrillic-ext', 'greek']}
             />
             <h1>It's always happy hour somewhere!</h1>
-            <div>Count down until 5 pm</div>
+            <div>Count down until the next 5:00 pm.</div>
             <span>{minutes} : {seconds}</span>
             <p>{drink} is the drink of choice in <br />{city}, {country}</p>
             <p>{note}</p>
