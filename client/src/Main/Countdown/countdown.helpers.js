@@ -77,7 +77,7 @@ export const getLocation = async () => {
         note: "N/A",
     }
     if(!supportedCities) return fallbackInfo;
-    var names = spacetime.whereIts("5:00pm");
+    var names = spacetime.whereIts("4:00pm");
     var validNames = validateZoneNames(names);
 
     const listOfCities = supportedCities.map(city => city.name);
