@@ -1,5 +1,6 @@
 import spacetime from 'spacetime';
 import {getLocations} from '../../Admin/Location/location.api'
+import {ErrorReporting} from '@google-cloud/error-reporting'
 
 /*
  * There was an issue where where its 5pm would give me zones off by 1 hour.
@@ -69,6 +70,8 @@ export const runCountdown = (currentTime) => {
 };
 
 export const getLocation = async () => {
+    const errors = new ErrorReporting();
+
     var supportedCities = await getLocations();
     var fallbackInfo = {
         city : "N/A",
@@ -84,10 +87,10 @@ export const getLocation = async () => {
     const citynames = listOfCities.filter(value => validNames.includes(value));
 
     if(citynames.length === 0) {
-        console.error({
+        errors.report({
             names,
             validNames
-        })
+        });
     }
 
     const cityname = citynames[Math.floor(Math.random() * citynames.length)];
