@@ -1,6 +1,14 @@
 import spacetime from 'spacetime';
 import {getLocations} from '../../Admin/Location/location.api'
-import {ErrorReporting} from '@google-cloud/error-reporting'
+
+import StackdriverErrorReporter from 'stackdriver-errors-js';
+
+const errorHandler = new StackdriverErrorReporter();
+errorHandler.start({
+    key: "AIzaSyDbLPAiDP0IOtX_7Nykt0X3PQtvEFEf00M",
+    projectId: "twino-282018",
+    service: "twino-countdown-errors",
+});
 
 /*
  * There was an issue where where its 5pm would give me zones off by 1 hour.
@@ -70,7 +78,6 @@ export const runCountdown = (currentTime) => {
 };
 
 export const getLocation = async () => {
-    const errors = new ErrorReporting();
 
     var supportedCities = await getLocations();
     var fallbackInfo = {
@@ -87,7 +94,8 @@ export const getLocation = async () => {
     const citynames = listOfCities.filter(value => validNames.includes(value));
 
     if(citynames.length === 0) {
-        errors.report({
+        // error 
+        errorHandler.report({
             names,
             validNames
         });
