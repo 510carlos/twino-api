@@ -1,0 +1,95 @@
+Arguments: 
+  /usr/local/Cellar/node/14.5.0/bin/node /usr/local/Cellar/yarn/1.22.4/libexec/bin/yarn.js
+
+PATH: 
+  /Users/carlosmendoza/Downloads/google-cloud-sdk/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
+
+Yarn version: 
+  1.22.4
+
+Node version: 
+  14.5.0
+
+Platform: 
+  darwin x64
+
+Trace: 
+  SyntaxError: /Users/carlosmendoza/Documents/code/carlos-git/twino-api/client/package.json: Unexpected token / in JSON at position 1465
+      at JSON.parse (<anonymous>)
+      at /usr/local/Cellar/yarn/1.22.4/libexec/lib/cli.js:1625:59
+      at Generator.next (<anonymous>)
+      at step (/usr/local/Cellar/yarn/1.22.4/libexec/lib/cli.js:310:30)
+      at /usr/local/Cellar/yarn/1.22.4/libexec/lib/cli.js:321:13
+
+npm manifest: 
+  {
+    "name": "5pm-countdown",
+    "version": "0.1.1",
+    "private": true,
+    "dependencies": {
+      "@google-cloud/error-reporting": "^2.0.0",
+      "@testing-library/jest-dom": "^4.2.4",
+      "@testing-library/react": "^9.5.0",
+      "@testing-library/user-event": "^7.2.1",
+      "antd": "^4.6.2",
+      "axios": "^0.20.0",
+      "express": "^4.17.1",
+      "react": "^16.13.1",
+      "react-dom": "^16.13.1",
+      "react-google-font-loader": "^1.1.0",
+      "react-router-dom": "^5.2.0",
+      "react-scripts": "^3.4.3",
+      "spacetime": "^6.6.0",
+      "stackdriver-errors-js": "^0.8.0",
+      "styled-components": "^5.1.1"
+    },
+    "scripts": {
+      "start": "react-scripts start",
+      "build": "react-scripts build",
+      "test": "react-scripts test",
+      "eject": "react-scripts eject",
+      "gcloud-build": "gcloud builds submit --tag gcr.io/twino-282018/cra-cloud-run",
+      "gcloud-deploy": "gcloud  beta run deploy --image gcr.io/twino-282018/cra-cloud-run --platform managed",
+      "lint": "eslint .",
+      "lint:fix": "eslint . --fix"
+    },
+    "eslintConfig": {
+      "extends": "react-app"
+    },
+    "browserslist": {
+      "production": [
+        ">0.2%",
+        "not dead",
+        "not op_mini all"
+      ],
+      "development": [
+        "last 1 chrome version",
+        "last 1 firefox version",
+        "last 1 safari version"
+      ]
+    },
+    "proxy": "http://localhost:5000/",
+    "devDependencies": {
+      "babel-eslint": "^10.1.0",
+      "enzyme-adapter-react-16": "^1.15.5",
+      "enzyme-to-json": "^3.6.1",
+      // "eslint": "^7.8.1",
+      "eslint-config-airbnb": "^18.2.0",
+      "eslint-config-prettier": "^6.11.0",
+      "eslint-config-wesbos": "1.0.1",
+      "eslint-plugin-html": "^6.1.0",
+      "eslint-plugin-import": "^2.22.0",
+      "eslint-plugin-jsx-a11y": "^6.3.1",
+      "eslint-plugin-prettier": "^3.1.4",
+      "eslint-plugin-react": "^7.20.6",
+      "eslint-plugin-react-hooks": "^4.1.2",
+      "prettier": "^2.1.1",
+      "react-test-renderer": "^17.0.1"
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile

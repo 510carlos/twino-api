@@ -1,1 +1,0 @@
-const logout = () => (<div>hello</div>);
