@@ -51,6 +51,7 @@ RUN pip install scipy
 RUN pip install aider-chat
 
 RUN apt-get update && apt-get install -y git
+RUN apt-get install -y graphviz
 
 # Set PATH
 ENV PATH="/home/node/.npm-global/bin:${PATH}"
