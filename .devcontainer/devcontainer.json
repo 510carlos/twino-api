@@ -1,0 +1,38 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the README at:
+// https://github.com/microsoft/vscode-dev-containers/tree/v0.245.0/containers/typescript-node
+{
+    "name": "The Weekend Is Never Over",
+    "dockerComposeFile": "docker-compose.yml",
+    "service": "app",
+    "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
+    // Configure tool-specific properties.
+    "customizations": {
+        // Configure properties specific to VS Code.
+        "vscode": {
+            // Add the IDs of extensions you want installed when the container is created.
+            "extensions": [
+                "dbaeumer.vscode-eslint",
+                "googlecloudtools.cloudcode",
+                "GitHub.copilot",
+                "atlassian.atlascode",
+                "mutantdino.resourcemonitor",
+                "esbenp.prettier-vscode",
+                "mongodb.mongodb-vscode"
+            ]
+        }
+    },
+    // Use 'forwardPorts' to make a list of ports inside the container available locally.
+    "forwardPorts": [3000, 6006, 27017],
+    /* start: if you are a developer please uncomment this */
+    // "containerEnv": {
+    // 	"DISPLAY": "host.docker.internal:0.0",
+    // 	"LIBGL_ALWAYS_INDIRECT": "0"
+    // }
+    /* end: if you are a developer please uncomment this */
+    // Use 'postCreateCommand' to run commands after the container is created.
+    // "postCreateCommand": [
+    //     "pnpm install"
+    // ],
+    // Comment out to connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
+    "remoteUser": "node"
+}
