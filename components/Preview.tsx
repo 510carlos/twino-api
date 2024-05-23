@@ -1,4 +1,5 @@
 "use client";
+import { Background } from "@tsparticles/engine";
 import { ClassValue, clsx } from "clsx";
 import Image from "next/image";
 import React, { useState } from "react";
@@ -19,6 +20,7 @@ const styles = {
     opacity: '.9',
     boxShadow: 'inset 0 2px 1px #333',
     borderTop: '1px solid #6366f1',
+    background: 'rgb(40 55 86 / 70%)',
     borderBottom: '1px solid #6366f1',
 }
 
@@ -81,7 +83,7 @@ function SparklesPreview() {
                             <div className="absolute inset-0 w-full h-full bg-black [mask-image:radial-gradient(350px_200px_at_top,transparent_20%,white)]"></div>
                         </div>
                     </div>
-                    <div style={styles} className="bg-white justify-center flex items-center h-[7rem] w-auto mx-2">
+                    <div style={styles} className="justify-center flex items-center h-[7rem] w-auto mx-2">
                         <img src={'https://www.theweekendisneverover.com/twino.png'} alt="logo" />
                     </div>
                     {/* <div style={main}>
