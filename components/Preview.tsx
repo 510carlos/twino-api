@@ -1,10 +1,11 @@
 "use client";
 import { ClassValue, clsx } from "clsx";
+import Image from "next/image";
 import React, { useState } from "react";
 import { twMerge } from "tailwind-merge";
 import { Meteors } from "./Meteors";
 import { HoveredLink, Menu, MenuItem, ProductItem } from "./navbar-menu";
-import { NavigationMenuDemo } from './NavigationMenu'
+// import { NavigationMenuDemo } from './NavigationMenu'
 import { SparklesCore } from "./sparkles";
 import { TracingBeam } from "./tracing-beam";
 
@@ -37,6 +38,10 @@ const main = {
 }
 
 function SparklesPreview() {
+    // dirname
+    const imagePath = 'https://theweekendisneverover.com/twino.png';
+
+    console.log('imagePath', imagePath);
     return (
         <>
             <div className="w-full absolute inset-0 h-screen">
@@ -81,7 +86,7 @@ function SparklesPreview() {
                         </div>
                     </div>
                     <div style={styles} className="bg-white justify-center flex items-center h-[7rem] w-auto mx-2">
-                        <img src="https://theweekendisneverover.com/static/media/logo-twino.ee75cd53.png" alt="logo" />
+                        <Image width={569} height={97} src={imagePath} alt="logo" />
                     </div>
                     {/* <div style={main}>
                         Welcome to the website.
