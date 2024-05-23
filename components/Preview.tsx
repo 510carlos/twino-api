@@ -38,10 +38,6 @@ const main = {
 }
 
 function SparklesPreview() {
-    // dirname
-    const imagePath = 'https://theweekendisneverover.com/twino.png';
-
-    console.log('imagePath', imagePath);
     return (
         <>
             <div className="w-full absolute inset-0 h-screen">
@@ -86,7 +82,7 @@ function SparklesPreview() {
                         </div>
                     </div>
                     <div style={styles} className="bg-white justify-center flex items-center h-[7rem] w-auto mx-2">
-                        <Image width={569} height={97} src={imagePath} alt="logo" />
+                        <img src={'https://www.theweekendisneverover.com/twino.png'} alt="logo" />
                     </div>
                     {/* <div style={main}>
                         Welcome to the website.
