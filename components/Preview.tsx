@@ -96,8 +96,8 @@ function SparklesPreview() {
                             </h1>
 
                             <p className="font-normal text-base text-slate-500 mb-4 relative z-50">
-                                The weekend is never over is a lifestyle committed to keeping good vibes alive one drink at a time. We are an online destination sharing drink and beverage recipes from all over the world. Our home page is a countdown clock to happy hour. Every hour counting down the minutes and seconds left to the next time it is 5 o'clock somewhere around the globe.
-                                Our online Etsy store sells streetwear clothing with our brand name. The idea for our logo was inspired by the American Sign Language (ASL) fingerspelling sign for the letter "W", the first letter in the word Weekend.
+                                The weekend is never over is a lifestyle committed to keeping good vibes alive one drink at a time. We are an online destination sharing drink and beverage recipes from all over the world. Our home page is a countdown clock to happy hour. Every hour counting down the minutes and seconds left to the next time it is 5 o&apos;clock somewhere around the globe.
+                                Our online Etsy store sells streetwear clothing with our brand name. The idea for our logo was inspired by the American Sign Language (ASL) fingerspelling sign for the letter &ldquo;W&rdquo;, the first letter in the word Weekend.
                                 Follow our journey through never-ending drink recipes from all around the globe. Whether you are working for the weekend or working on the weekend, the weekend is never over when you can take a moment to enjoy a refreshing drink.
                             </p>
                             <p className="font-normal text-base text-slate-500 mb-4 relative z-50">

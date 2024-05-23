@@ -3,7 +3,6 @@
 import Link from "next/link"
 import * as React from "react"
 
-import { Icons } from "@/components/icons"
 import {
     NavigationMenu,
     NavigationMenuContent,
