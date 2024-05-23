@@ -38,7 +38,6 @@ const main = {
 }
 
 function SparklesPreview() {
-    const imagePath = 'https://theweekendisneverover.com/twino.png';
     return (
         <>
             <div className="w-full absolute inset-0 h-screen">
