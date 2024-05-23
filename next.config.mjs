@@ -23,6 +23,11 @@ const config = withPlugins([[withBundleAnalyzer({ enabled: env.ANALYZE })]], {
         hostname: 'assets.aceternity.com',
         port: '',
       },
+      {
+        protocol: 'https',
+        hostname: 'www.theweekendisneverover.com',
+        port: '',
+      },
     ],
   },
 })
