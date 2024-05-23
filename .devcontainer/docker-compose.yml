@@ -22,6 +22,8 @@ services:
         restart: unless-stopped
         volumes:
             - mongodb-data:/data/db
+        ports:
+            - '${LOCAL_MONGODB_PORT:-30099}:27017'
 
         environment:
             MONGO_INITDB_ROOT_USERNAME: root

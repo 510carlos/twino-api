@@ -16,6 +16,15 @@ const config = withPlugins([[withBundleAnalyzer({ enabled: env.ANALYZE })]], {
       { source: "/ping", destination: "/api/health" },
     ]
   },
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'assets.aceternity.com',
+        port: '',
+      },
+    ],
+  },
 })
 
 export default config
