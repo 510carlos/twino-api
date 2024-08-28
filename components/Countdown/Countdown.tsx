@@ -2,9 +2,8 @@
 
 import React, { useEffect, useState } from 'react';
 import { cities } from './cities';
-import { calculateTimeLeft, getCurrentTimeZone } from './Countdown.helper';
+import { calculateTimeLeft, getCurrentTimeZone, getNextTimeZone } from './Countdown.helper';
 
-// Helper function to initialize the countdown data
 const initializeCountdownData = () => {
     const initialZone = getCurrentTimeZone();
     if (initialZone && cities[initialZone]) {
@@ -30,10 +29,30 @@ const Countdown = () => {
 
     useEffect(() => {
         const interval = setInterval(() => {
-            setCountdownData((prevData) => ({
-                ...prevData,
-                timeLeft: calculateTimeLeft(),
-            }));
+            setCountdownData((prevData) => {
+                const newTimeLeft = calculateTimeLeft();
+
+                if (newTimeLeft.minutes === 0 && newTimeLeft.seconds === 0) {
+                    const nextZone = getNextTimeZone(prevData.currentTimeZone);
+                    const nextCityData = cities[nextZone][0];
+
+                    return {
+                        timeLeft: calculateTimeLeft(),
+                        currentTimeZone: nextZone,
+                        locationData: {
+                            city: nextCityData.city,
+                            country: '', // Add the country if you have it in your data
+                            drink: nextCityData.drink,
+                            note: 'Enjoy responsibly!',
+                        },
+                    };
+                }
+
+                return {
+                    ...prevData,
+                    timeLeft: newTimeLeft,
+                };
+            });
         }, 1000);
 
         return () => clearInterval(interval);
