@@ -1,5 +1,5 @@
 import spacetime from "spacetime"
-import { cities } from "./cities" // Adjust the import path if necessary
+import { cities } from "./cities"
 
 export const calculateTimeLeft = () => {
   const now = new Date()
@@ -25,4 +25,11 @@ export const getCurrentTimeZone = () => {
   const currentZone = zones.find((zone) => now.goto(zone).hour() === 17)
 
   return currentZone || "No matching time zone found"
+}
+
+export const getNextTimeZone = (currentZone) => {
+  const zones = Object.keys(cities)
+  const currentIndex = zones.indexOf(currentZone)
+  const nextIndex = (currentIndex + 1) % zones.length
+  return zones[nextIndex]
 }
