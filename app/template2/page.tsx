@@ -101,7 +101,7 @@ export default function CountdownComponent() {
                     transition={{ duration: 0.5 }}
                     style={{ animation: 'neon-pulse 1.5s ease-in-out infinite alternate' }}
                 >
-                    The Weekend's Never Over
+                    The Weekend Is Never Over
                 </motion.h1>
                 <motion.h2
                     className="text-2xl md:text-3xl font-semibold mb-8 text-center text-[#ff00ff]"
@@ -109,7 +109,7 @@ export default function CountdownComponent() {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5, delay: 0.2 }}
                 >
-                    It's 5:00 O'clock Somewhere
+                    It&apos;s 5:00 O&apos;clock Somewhere
                 </motion.h2>
 
                 <motion.div

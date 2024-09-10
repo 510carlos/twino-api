@@ -125,13 +125,13 @@ export default function Component() {
                         className={`text-4xl md:text-6xl font-bold text-shadow transition-all duration-1000 ease-out ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-10'
                             }`}
                     >
-                        The Weekend's Never Over
+                        The Weekend Is Never Over
                     </h1>
                     <p
                         className={`text-2xl md:text-3xl font-semibold text-yellow-200 transition-all duration-1000 ease-out delay-500 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
                             }`}
                     >
-                        It's 5:00 O'clock Somewhere
+                        It&apos;s 5:00 O&apos;clock Somewhere
                     </p>
                 </div>
 
