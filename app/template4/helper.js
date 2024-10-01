@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react"
 
-export const useCountdown = () => {
+export const useCountdown = (onHourChange) => {
   const [timeLeft, setTimeLeft] = useState(0)
   const [showConfetti, setShowConfetti] = useState(false)
 
@@ -26,6 +26,7 @@ export const useCountdown = () => {
         setTimeout(() => {
           setShowConfetti(false)
         }, 5000) // Show confetti for 5 seconds
+        onHourChange() // Call the callback when the hour changes
       }
     }
 
@@ -33,7 +34,15 @@ export const useCountdown = () => {
     const timer = setInterval(updateTimer, 1000)
 
     return () => clearInterval(timer)
-  }, [])
+  }, [onHourChange])
 
   return { timeLeft, showConfetti }
+}
+
+export const pickDrink = (data) => {
+  if (data.length === 0) {
+      return null;
+  }
+  const randomIndex = Math.floor(Math.random() * data.length);
+  return data[randomIndex];
 }

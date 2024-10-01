@@ -3,7 +3,7 @@ import { motion } from 'framer-motion'
 import { AnimatePresence } from 'framer-motion'
 import { Coffee, MapPin } from 'lucide-react'
 
-export const CountdownTimer = ({ timeLeft, setIsHovering, isHovering }) => {
+export const CountdownTimer = ({ location, drinkName, timeLeft, setIsHovering, isHovering }) => {
     const formatTime = (time) => {
         const minutes = Math.floor(time / 60)
         const seconds = time % 60
@@ -74,7 +74,7 @@ export const CountdownTimer = ({ timeLeft, setIsHovering, isHovering }) => {
                     }}
                 >
                     <MapPin className="mr-2" />
-                    <span>New York, USA</span>
+                    <span>{location}</span>
                 </motion.div>
                 <motion.div
                     className="flex items-center"
@@ -85,7 +85,7 @@ export const CountdownTimer = ({ timeLeft, setIsHovering, isHovering }) => {
                     }}
                 >
                     <Coffee className="mr-2" />
-                    <span>Margarita</span>
+                    <span>{drinkName}</span>
                 </motion.div>
             </motion.div>
         </motion.div>
