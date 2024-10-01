@@ -9,12 +9,13 @@ import { CountdownTimer } from './components/CountdownTimer'
 import { Header } from './components/Header'
 import { ProgressBar } from './components/ProgressBar'
 import { RecipeComponent } from './components/RecipeComponent'
+
 import { useCountdown } from './helper'
 
 
 // Main Application Component
 export default function MergedTemplate() {
-    const { timeLeft, showConfetti } = useCountdown(61);
+    const { timeLeft, showConfetti } = useCountdown(60);
     const [isHovering, setIsHovering] = useState('')
 
     return (

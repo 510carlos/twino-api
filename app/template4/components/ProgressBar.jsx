@@ -1,17 +1,18 @@
-'use client';
+'use client'
 
 import { motion } from 'framer-motion'
 
+// Progress Bar Component
 export const ProgressBar = ({ timeLeft }) => (
-    <div className="w-full h-3 bg-[#1a1a1a] relative overflow-hidden">
+    <div className="w-full h-2 bg-[#1a1a1a] relative overflow-hidden">
         <motion.div
-            className="absolute inset-y-1"
+            className="absolute inset-y-0"
             style={{
-                left: '49%',
-                right: '49%',
-                background: 'linear-gradient(89deg, #00ffff, #ff00ff)',
-                boxShadow: '-1 0 10px #00ffff, 0 0 20px #ff00ff',
-                animation: 'progress-glow 1s linear infinite',
+                left: '50%',
+                right: '50%',
+                background: 'linear-gradient(90deg, #00ffff, #ff00ff)',
+                boxShadow: '0 0 10px #00ffff, 0 0 20px #ff00ff',
+                animation: 'progress-glow 2s linear infinite',
             }}
             animate={{
                 left: `${50 - (timeLeft / 60) * 50}%`,
@@ -20,17 +21,17 @@ export const ProgressBar = ({ timeLeft }) => (
             transition={{ duration: 0.5, ease: 'linear' }}
         />
         <motion.div
-            className="absolute top-1 left-0 h-full w-full"
+            className="absolute top-0 left-0 h-full w-full"
             style={{
-                background: 'linear-gradient(89deg, transparent, rgba(255,255,255,0.1), transparent)',
-                backgroundSize: '199% 100%',
+                background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent)',
+                backgroundSize: '200% 100%',
             }}
             animate={{
-                backgroundPosition: ['99% 0%', '-100% 0%'],
+                backgroundPosition: ['100% 0%', '-100% 0%'],
             }}
             transition={{
                 repeat: Infinity,
-                duration: 0.5,
+                duration: 1.5,
                 ease: 'linear',
             }}
         />
