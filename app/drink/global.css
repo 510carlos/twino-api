@@ -1,0 +1,53 @@
+@keyframes neon-pulse {
+  0% {
+    text-shadow:
+      0 0 5px #00ffff,
+      0 0 10px #00ffff,
+      0 0 20px #00ffff;
+  }
+  100% {
+    text-shadow:
+      0 0 2px #00ffff,
+      0 0 5px #00ffff,
+      0 0 10px #00ffff;
+  }
+}
+
+@keyframes laser-border {
+  0% {
+    box-shadow:
+      0 0 0 2px #00ffff,
+      0 0 0 4px #050505,
+      0 0 20px #00ffff;
+  }
+  50% {
+    box-shadow:
+      0 0 0 2px #ff00ff,
+      0 0 0 4px #050505,
+      0 0 20px #ff00ff;
+  }
+  100% {
+    box-shadow:
+      0 0 0 2px #00ffff,
+      0 0 0 4px #050505,
+      0 0 20px #00ffff;
+  }
+}
+
+@keyframes progress-glow {
+  0% {
+    box-shadow:
+      0 0 5px #00ffff,
+      0 0 10px #00ffff;
+  }
+  50% {
+    box-shadow:
+      0 0 10px #ff00ff,
+      0 0 20px #ff00ff;
+  }
+  100% {
+    box-shadow:
+      0 0 5px #00ffff,
+      0 0 10px #00ffff;
+  }
+}
