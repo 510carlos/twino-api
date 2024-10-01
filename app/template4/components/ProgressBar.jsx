@@ -15,8 +15,8 @@ export const ProgressBar = ({ timeLeft }) => (
                 animation: 'progress-glow 2s linear infinite',
             }}
             animate={{
-                left: `${50 - (timeLeft / 60) * 50}%`,
-                right: `${50 - (timeLeft / 60) * 50}%`,
+                left: `${50 - (timeLeft / 3600) * 50}%`,
+                right: `${50 - (timeLeft / 3600) * 50}%`,
             }}
             transition={{ duration: 0.5, ease: 'linear' }}
         />
