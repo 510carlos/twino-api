@@ -11,7 +11,7 @@ const Home = async () => {
         {drinks.map(({ name, id }) => (
           <li key={id} className="hover:bg-gray-50 p-4 rounded-lg transition-colors">
             <Link
-              href={`/drink/${id}`}
+              href={`/drinks/${id}`}
               className="text-lg text-blue-600 hover:text-blue-800 hover:underline"
             >
               {name}
