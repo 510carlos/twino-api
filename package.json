@@ -18,6 +18,8 @@
   "license": "ISC",
   "devDependencies": {
     "turbo": "^1.10.12",
-    "typescript": "^5"
+    "typescript": "^5",
+    "eslint": "^9",
+    "@next/eslint-plugin-next": "^15"
   }
 }
