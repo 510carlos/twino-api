@@ -1,5 +1,7 @@
+import { getDatabaseClient } from "./db";
+
 export const createContext = async () => {
-  return {};
+  return { db: await getDatabaseClient() };
 };
 
 export type Context = Awaited<ReturnType<typeof createContext>>;
