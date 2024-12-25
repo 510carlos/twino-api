@@ -1,12 +1,23 @@
 {
-  "name": "twino-api",
-  "version": "1.0.0",
+  "name": "my-monorepo",
+  "private": true,
+  "version": "0.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "turbo run build",
+    "dev": "turbo run dev --parallel",
+    "lint": "turbo run lint",
+    "test": "turbo run test",
+    "changeset": "changeset",
+    "version": "changeset version",
+    "publish": "turbo run publish --filter=!docs"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "turbo": "^1.10.12",
+    "typescript": "^5"
+  }
 }

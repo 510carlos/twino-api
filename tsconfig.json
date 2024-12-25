@@ -1,0 +1,13 @@
+{
+  "files": [],
+  "references": [{ "path": "apps/twino" }, { "path": "packages/trpc" }],
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["apps/twino/src/*"], // Alias for app src
+      "@/trpc/*": ["packages/trpc/src/index.ts"] // Alias for trpc package
+    },
+    "composite": true, // Enables project references
+    "skipLibCheck": true
+  }
+}

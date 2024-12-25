@@ -35,3 +35,7 @@ yarn-error.log*
 /.npm-only-allow
 
 *.aider*
+.aider*
+.env
+
+aider.conf.yml
