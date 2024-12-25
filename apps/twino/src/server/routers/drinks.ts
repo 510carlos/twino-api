@@ -3,22 +3,34 @@ import { z } from "zod";
 
 // Mock data - in a real app this would come from a database
 const drinks = [
-  { id: 1, name: "Espresso", type: "Coffee" },
-  { id: 2, name: "Latte", type: "Coffee" },
-  { id: 3, name: "Green Tea", type: "Tea" },
+  {
+    name: "Green Tea",
+    id: "green-tea",
+    description: "A soothing green tea.",
+    ingredients: ["Green tea leaves", "Water"],
+  },
+  {
+    name: "Black Coffee",
+    id: "black-coffee",
+    description: "A strong black coffee.",
+    ingredients: ["Coffee beans", "Hot water"],
+  },
 ];
+
+type Drink = (typeof drinks)[0];
 
 export const drinksRouter = router({
   getAll: publicProcedure.query(async () => {
-    return drinks;
+    return drinks.map(({ name, id }) => ({ name, id }));
   }),
 
   getByName: publicProcedure
     .input(z.object({ name: z.string() }))
     .query(async ({ input }) => {
       const drink = drinks.find(
-        (d) => d.name.toLowerCase() === input.name.toLowerCase()
+        (d) => d.id.toLowerCase() === input.name.toLowerCase()
       );
+      if (!drink) throw new Error(`Drink ${input.name} not found`);
       return drink;
     }),
 });
