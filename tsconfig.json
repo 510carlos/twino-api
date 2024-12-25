@@ -1,13 +1,22 @@
 {
-  "files": [],
-  "references": [{ "path": "apps/twino" }, { "path": "packages/trpc" }],
   "compilerOptions": {
+    "target": "es2024",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "incremental": true,
     "baseUrl": ".",
-    "paths": {
-      "@/*": ["apps/twino/src/*"], // Alias for app src
-      "@/trpc/*": ["packages/trpc/src/index.ts"] // Alias for trpc package
-    },
-    "composite": true, // Enables project references
-    "skipLibCheck": true
-  }
+    "paths": {}
+  },
+  "include": ["apps/twino/src/**/*.ts", "apps/twino/src/**/*.tsx"],
+  "exclude": ["node_modules"]
 }
