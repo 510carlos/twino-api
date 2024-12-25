@@ -39,3 +39,4 @@ yarn-error.log*
 .env
 
 aider.conf.yml
+.turbo/cookies/

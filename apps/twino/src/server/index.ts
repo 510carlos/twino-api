@@ -1,9 +1,2 @@
-import { publicProcedure, router } from "./trpc";
-
-export const appRouter = router({
-  test: publicProcedure.query(() => {
-    return { data: "Hello trpc!" };
-  }),
-});
-
-export type AppRouter = typeof appRouter;
+export { default as appRouter } from "./appRouter";
+export type { AppRouter } from "./appRouter";

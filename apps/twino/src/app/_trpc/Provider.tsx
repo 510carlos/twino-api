@@ -4,7 +4,7 @@ import { httpBatchLink } from '@trpc/client';
 import React, { useState } from 'react';
 import superjson from 'superjson';
 import { trpc } from './client';
-import { getBaseUrl } from '../../../config';
+import { config } from '../../config';
 
 export default function Provider({ children }: { children: React.ReactNode }) {
     const [queryClient] = useState(() => new QueryClient({}));
@@ -12,7 +12,7 @@ export default function Provider({ children }: { children: React.ReactNode }) {
         trpc.createClient({
             links: [
                 httpBatchLink({
-                    url: `${getBaseUrl()}/api/trpc`,
+                    url: `${config.baseUrl}/api/trpc`,
                 }),
             ],
             transformer: superjson,
