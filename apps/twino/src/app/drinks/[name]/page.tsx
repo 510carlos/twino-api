@@ -1,5 +1,5 @@
-import { serverClient } from '../../../lib/trpc/serverClient';
 import Link from 'next/link';
+import { serverClient } from '../../../lib/trpc/serverClient';
 
 interface PageProps {
     params: {
@@ -8,7 +8,8 @@ interface PageProps {
 }
 
 const DrinkPage = async ({ params }: PageProps) => {
-    const drink = await serverClient.drinks.getByName({ name: params.name });
+    const client = await serverClient();
+    const drink = await client.drinks.getByName({ name: params.name });
 
     return (
         <div className="container mx-auto px-4 py-8">

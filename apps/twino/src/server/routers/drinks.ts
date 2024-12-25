@@ -1,37 +1,171 @@
-import { publicProcedure, router } from "../trpc";
+import { TRPCError } from "@trpc/server";
+import { Collection, Db } from "mongodb";
 import { z } from "zod";
+import { drinksSchemas } from "./schemas/drinks";
+import { DrinkDocument } from "../db/schemas/drinks.schema";
+import { publicProcedure, router } from "../trpc";
 
-// Mock data - in a real app this would come from a database
-const drinks = [
-  {
-    name: "Green Tea",
-    id: "green-tea",
-    description: "A soothing green tea.",
-    ingredients: ["Green tea leaves", "Water"],
-  },
-  {
-    name: "Black Coffee",
-    id: "black-coffee",
-    description: "A strong black coffee.",
-    ingredients: ["Coffee beans", "Hot water"],
-  },
-];
+// Utility functions
+const getDrinksCollection = (db: Db | undefined): Collection<DrinkDocument> => {
+  console.log("[Drinks Router] Attempting to get drinks collection");
+  console.log("[Drinks Router] Database instance:", db ? "Present" : "Missing");
 
-type Drink = (typeof drinks)[0];
+  if (!db) {
+    console.error("[Drinks Router] Database connection not available");
+    throw new TRPCError({
+      code: "INTERNAL_SERVER_ERROR",
+      message:
+        "Database connection not available. Please check your MongoDB configuration.",
+    });
+  }
 
+  console.log("[Drinks Router] Successfully got drinks collection");
+  return db.collection<DrinkDocument>("drinks");
+};
+
+const formatDrinkId = (name: string): string =>
+  name.toLowerCase().replace(/\s+/g, "-");
+
+const handleDrinkNotFound = (name: string): never => {
+  throw new TRPCError({
+    code: "NOT_FOUND",
+    message: `Drink ${name} not found`,
+  });
+};
+
+// Router implementation
 export const drinksRouter = router({
-  getAll: publicProcedure.query(async () => {
-    return drinks.map(({ name, id }) => ({ name, id }));
-  }),
-
   getByName: publicProcedure
-    .input(z.object({ name: z.string() }))
-    .query(async ({ input }) => {
-      const drink = drinks.find(
-        (d) => d.id.toLowerCase() === input.name.toLowerCase()
-      );
-      if (!drink) throw new Error(`Drink ${input.name} not found`);
-      return drink;
+    .input(drinksSchemas.getByNameInput)
+    .output(drinksSchemas.getByNameOutput)
+    .query(async ({ input, ctx }) => {
+      try {
+        console.log(
+          "[Drinks Router] getByName: Starting query for",
+          input.name
+        );
+        console.log(
+          "[Drinks Router] Context database:",
+          ctx.db ? "Present" : "Missing"
+        );
+        const collection = getDrinksCollection(ctx.db);
+        const drinkId = formatDrinkId(input.name);
+
+        const drink = await collection.findOne({ id: drinkId });
+
+        if (!drink) {
+          handleDrinkNotFound(input.name);
+        }
+
+        // Transform MongoDB document to match output schema
+        const { _id, createdAt, updatedAt, ...baseDrink } =
+          drink as DrinkDocument;
+        return baseDrink;
+      } catch (error) {
+        throw new TRPCError({
+          code: "INTERNAL_SERVER_ERROR",
+          message:
+            error instanceof Error
+              ? error.message
+              : "An unexpected error occurred",
+        });
+      }
+    }),
+
+  // Additional procedures can be added here
+  list: publicProcedure
+    .input(
+      z.object({
+        limit: z.number().min(1).max(100).default(10),
+        cursor: z.string().optional(),
+      })
+    )
+    .query(async ({ input, ctx }) => {
+      try {
+        console.log(
+          "[Drinks Router] list: Starting query with limit",
+          input.limit
+        );
+        console.log(
+          "[Drinks Router] Context database:",
+          ctx.db ? "Present" : "Missing"
+        );
+        const collection = getDrinksCollection(ctx.db);
+
+        const items = await collection
+          .find({})
+          .limit(input.limit)
+          .skip(input.cursor ? parseInt(input.cursor) : 0)
+          .toArray()
+          .then((drinks: DrinkDocument[]) =>
+            drinks.map(
+              ({ _id, createdAt, updatedAt, ...baseDrink }) => baseDrink
+            )
+          );
+
+        const nextCursor =
+          items.length === input.limit
+            ? (input.cursor ? parseInt(input.cursor) : 0) + input.limit
+            : undefined;
+
+        return {
+          items,
+          nextCursor: nextCursor?.toString(),
+        };
+      } catch (error) {
+        throw new TRPCError({
+          code: "INTERNAL_SERVER_ERROR",
+          message:
+            error instanceof Error
+              ? error.message
+              : "An unexpected error occurred",
+        });
+      }
+    }),
+
+  create: publicProcedure
+    .input(drinksSchemas.getByNameOutput)
+    .mutation(async ({ input, ctx }) => {
+      try {
+        console.log(
+          "[Drinks Router] create: Starting mutation for",
+          input.name
+        );
+        console.log(
+          "[Drinks Router] Context database:",
+          ctx.db ? "Present" : "Missing"
+        );
+        const collection = getDrinksCollection(ctx.db);
+        const drinkId = formatDrinkId(input.name);
+
+        const existingDrink = await collection.findOne({ id: drinkId });
+        if (existingDrink) {
+          throw new TRPCError({
+            code: "CONFLICT",
+            message: `Drink ${input.name} already exists`,
+          });
+        }
+
+        const drink: DrinkDocument = {
+          ...input,
+          _id: drinkId,
+          id: drinkId,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        };
+
+        await collection.insertOne(drink);
+        return drink;
+      } catch (error) {
+        if (error instanceof TRPCError) throw error;
+        throw new TRPCError({
+          code: "INTERNAL_SERVER_ERROR",
+          message:
+            error instanceof Error
+              ? error.message
+              : "An unexpected error occurred",
+        });
+      }
     }),
 });
 

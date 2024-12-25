@@ -1,11 +1,13 @@
-import { httpBatchLink } from "@trpc/client";
+import { FetchCreateContextFnOptions } from "@trpc/server/adapters/fetch";
 import appRouter from "../../server/appRouter";
-import { config } from "../../config";
+import { createContext } from "../../server/context";
 
-export const serverClient = appRouter.createCaller({
-  links: [
-    httpBatchLink({
-      url: `${config.baseUrl}/api/trpc`,
-    }),
-  ],
-});
+export const serverClient = async () => {
+  // Create a minimal context for server-side calls
+  const ctx = await createContext({
+    req: new Request("http://dummy-url"),
+    resHeaders: new Headers(),
+  } as FetchCreateContextFnOptions);
+
+  return appRouter.createCaller(ctx);
+};
