@@ -2,7 +2,7 @@ import { publicProcedure, router } from "./trpc";
 
 export const appRouter = router({
   test: publicProcedure.query(() => {
-    return { data: "Hello world" };
+    return { data: "Hello trpc!" };
   }),
 });
 
