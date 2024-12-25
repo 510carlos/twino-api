@@ -7,11 +7,7 @@ import { publicProcedure, router } from "../trpc";
 
 // Utility functions
 const getDrinksCollection = (db: Db | undefined): Collection<DrinkDocument> => {
-  console.log("[Drinks Router] Attempting to get drinks collection");
-  console.log("[Drinks Router] Database instance:", db ? "Present" : "Missing");
-
   if (!db) {
-    console.error("[Drinks Router] Database connection not available");
     throw new TRPCError({
       code: "INTERNAL_SERVER_ERROR",
       message:
@@ -19,7 +15,6 @@ const getDrinksCollection = (db: Db | undefined): Collection<DrinkDocument> => {
     });
   }
 
-  console.log("[Drinks Router] Successfully got drinks collection");
   return db.collection<DrinkDocument>("drinks");
 };
 
@@ -40,24 +35,12 @@ export const drinksRouter = router({
     .output(drinksSchemas.getByNameOutput)
     .query(async ({ input, ctx }) => {
       try {
-        console.log(
-          "[Drinks Router] getByName: Starting query for",
-          input.name
-        );
-        console.log(
-          "[Drinks Router] Context database:",
-          ctx.db ? "Present" : "Missing"
-        );
         const collection = getDrinksCollection(ctx.db);
         const drinkId = formatDrinkId(input.name);
-
         const drink = await collection.findOne({ id: drinkId });
-
         if (!drink) {
           handleDrinkNotFound(input.name);
         }
-
-        // Transform MongoDB document to match output schema
         const { _id, createdAt, updatedAt, ...baseDrink } =
           drink as DrinkDocument;
         return baseDrink;
@@ -71,8 +54,6 @@ export const drinksRouter = router({
         });
       }
     }),
-
-  // Additional procedures can be added here
   list: publicProcedure
     .input(
       z.object({
@@ -82,16 +63,7 @@ export const drinksRouter = router({
     )
     .query(async ({ input, ctx }) => {
       try {
-        console.log(
-          "[Drinks Router] list: Starting query with limit",
-          input.limit
-        );
-        console.log(
-          "[Drinks Router] Context database:",
-          ctx.db ? "Present" : "Missing"
-        );
         const collection = getDrinksCollection(ctx.db);
-
         const items = await collection
           .find({})
           .limit(input.limit)
@@ -102,12 +74,10 @@ export const drinksRouter = router({
               ({ _id, createdAt, updatedAt, ...baseDrink }) => baseDrink
             )
           );
-
         const nextCursor =
           items.length === input.limit
             ? (input.cursor ? parseInt(input.cursor) : 0) + input.limit
             : undefined;
-
         return {
           items,
           nextCursor: nextCursor?.toString(),
@@ -122,22 +92,12 @@ export const drinksRouter = router({
         });
       }
     }),
-
   create: publicProcedure
     .input(drinksSchemas.getByNameOutput)
     .mutation(async ({ input, ctx }) => {
       try {
-        console.log(
-          "[Drinks Router] create: Starting mutation for",
-          input.name
-        );
-        console.log(
-          "[Drinks Router] Context database:",
-          ctx.db ? "Present" : "Missing"
-        );
         const collection = getDrinksCollection(ctx.db);
         const drinkId = formatDrinkId(input.name);
-
         const existingDrink = await collection.findOne({ id: drinkId });
         if (existingDrink) {
           throw new TRPCError({
@@ -145,7 +105,6 @@ export const drinksRouter = router({
             message: `Drink ${input.name} already exists`,
           });
         }
-
         const drink: DrinkDocument = {
           ...input,
           _id: drinkId,
@@ -153,7 +112,6 @@ export const drinksRouter = router({
           createdAt: new Date(),
           updatedAt: new Date(),
         };
-
         await collection.insertOne(drink);
         return drink;
       } catch (error) {
