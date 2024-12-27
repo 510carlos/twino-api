@@ -1,6 +1,7 @@
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { initTRPC, TRPCError } from "@trpc/server";
-import { Context } from "./context";
 import superjson from "superjson";
+import { Context } from "./context";
 
 const t = initTRPC.context<Context>().create({
   transformer: superjson,
@@ -13,6 +14,9 @@ const t = initTRPC.context<Context>().create({
     },
   }),
 });
+
+// Export t for creating callers
+export { t };
 
 // Base router and procedure helpers
 export const router = t.router;

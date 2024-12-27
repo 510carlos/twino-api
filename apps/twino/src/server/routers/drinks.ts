@@ -41,6 +41,7 @@ export const drinksRouter = router({
         if (!drink) {
           handleDrinkNotFound(input.name);
         }
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         const { _id, createdAt, updatedAt, ...baseDrink } =
           drink as DrinkDocument;
         return baseDrink;
@@ -71,6 +72,7 @@ export const drinksRouter = router({
           .toArray()
           .then((drinks: DrinkDocument[]) =>
             drinks.map(
+              // eslint-disable-next-line @typescript-eslint/no-unused-vars
               ({ _id, createdAt, updatedAt, ...baseDrink }) => baseDrink
             )
           );

@@ -17,9 +17,12 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "turbo": "^1.10.12",
-    "typescript": "^5",
+    "@next/eslint-plugin-next": "^15",
     "eslint": "^9",
-    "@next/eslint-plugin-next": "^15"
+    "turbo": "^1.10.12",
+    "typescript": "^5"
+  },
+  "dependencies": {
+    "mongodb": "^6.12.0"
   }
 }

@@ -12,7 +12,7 @@ RUN apt-get update && apt-get install -y sudo && \
     echo "node ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 
 # Install Node.js (Choose your preferred version)
-ARG NODE_VERSION=18.x
+ARG NODE_VERSION=20.x
 RUN apt-get update && apt-get install -y curl software-properties-common && \
     curl -sL https://deb.nodesource.com/setup_${NODE_VERSION} | bash - && \
     apt-get install -y nodejs

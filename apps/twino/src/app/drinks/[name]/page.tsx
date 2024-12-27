@@ -1,17 +1,17 @@
+// apps/twino/src/app/drinks/[name]/page.tsx
 import Link from 'next/link';
 import { serverClient } from '../../../lib/trpc/serverClient';
 
-type PageProps = {
-    params: {
+interface PageProps {
+    params: Promise<{
         name: string;
-    };
-};
+    }>;
+}
 
 const DrinkPage = async ({ params }: PageProps) => {
     const { name } = await params;
     const client = await serverClient();
     const drink = await client.drinks.getByName({ name });
-
     return (
         <div className="container mx-auto px-4 py-8">
             <Link
@@ -20,11 +20,9 @@ const DrinkPage = async ({ params }: PageProps) => {
             >
                 ← Back to Drinks
             </Link>
-
             <div className="bg-white rounded-lg shadow-lg p-6 mt-4">
                 <h1 className="text-3xl font-bold mb-4">{drink.name}</h1>
                 <p className="text-gray-600 mb-6">{drink.description}</p>
-
                 <div>
                     <h2 className="text-xl font-semibold mb-3">Ingredients</h2>
                     <ul className="list-disc list-inside space-y-2">
