@@ -1,194 +1,103 @@
 "use client";
-import { ClassValue, clsx } from "clsx";
-import Image from "next/image";
-import React, { useState } from "react";
-import { twMerge } from "tailwind-merge";
+
+import { Countdown } from "./Countdown";
 import { Meteors } from "./Meteors";
-import { HoveredLink, Menu, MenuItem, ProductItem } from "./navbar-menu";
-// import { NavigationMenuDemo } from './NavigationMenu'
 import { SparklesCore } from "./sparkles";
-import { TracingBeam } from "./tracing-beam";
 
+export default function Preview() {
+  return (
+    <div className="min-h-screen bg-black relative overflow-hidden">
+      {/* Star background */}
+      <div className="fixed inset-0 w-full h-full">
+        <SparklesCore
+          id="tsparticlesfullpage"
+          background="transparent"
+          minSize={0.6}
+          maxSize={1.4}
+          particleDensity={100}
+          className="w-full h-full"
+          particleColor="#FFFFFF"
+        />
+      </div>
 
-export function cn(...inputs: ClassValue[]) {
-    return twMerge(clsx(inputs));
-}
+      {/* Main content */}
+      <div className="relative z-10 min-h-screen flex flex-col">
+        {/* Navigation */}
+        <nav className="w-full px-6 py-4">
+          <div className="max-w-6xl mx-auto flex items-center justify-between">
+            <a
+              href="https://theweekendisneverover.com/"
+              className="px-6 py-2 text-white/80 hover:text-white transition-all duration-300 rounded-full backdrop-blur-md bg-white/5 border border-white/10 hover:border-white/20 hover:bg-white/10"
+            >
+              Home
+            </a>
+            <a
+              href="https://www.etsy.com/shop/WeekendIsNeverOver"
+              className="px-6 py-2 text-white/80 hover:text-white transition-all duration-300 rounded-full backdrop-blur-md bg-white/5 border border-white/10 hover:border-white/20 hover:bg-white/10"
+            >
+              Shop
+            </a>
+          </div>
+        </nav>
 
-const styles = {
-    borderRadius: '33px',
-    opacity: '.9',
-    boxShadow: 'inset 0 2px 1px #333',
-    borderTop: '1px solid #6366f1',
-    borderBottom: '1px solid #6366f1',
-}
-
-const main = {
-    marginTop: '10rem',
-    background: 'rgba(255, 255, 255, .5)',
-    height: '750px',
-    borderRadius: '33px',
-    borderBottom: '1px solid #ccc',
-    borderTop: '1px solid #aaa',
-    boxShadow: 'inset 0 1px 2px #333',
-    padding: '20px',
-    color: 'white',
-    fontSize: '1.5rem',
-    textShadow: '0 1px 1px black',
-    textAlign: 'center',
-}
-
-function SparklesPreview() {
-    return (
-        <>
-            <div className="w-full absolute inset-0 h-screen">
-                <SparklesCore
-                    id="tsparticlesfullpage"
-                    background="transparent"
-                    minSize={0.6}
-                    maxSize={1.4}
-                    particleDensity={100}
-                    className="w-full h-full"
-                    particleColor="#FFFFFF"
-                />
+        {/* Logo */}
+        <div className="w-full px-4 mt-8">
+          <div className="max-w-4xl mx-auto">
+            <div className="relative rounded-2xl overflow-hidden backdrop-blur-sm bg-white/5 border border-white/10 p-6">
+              {/* Gradient glow behind logo */}
+              <div className="absolute inset-0 bg-gradient-to-r from-pink-500/20 via-purple-500/20 to-cyan-500/20 blur-xl" />
+              <img
+                src="https://www.theweekendisneverover.com/twino.png"
+                alt="The Weekend Is Never Over"
+                className="relative w-full h-auto max-h-24 object-contain"
+              />
             </div>
-            <TracingBeam className="">
-                <div className="relative w-full flex items-center justify-center text-white text-2xl">
-                    <a href="https://theweekendisneverover.com/" className="pr-5">Home</a>
-                    <a href="https://www.etsy.com/shop/WeekendIsNeverOver" className="pl-5">Shop</a>
-                </div>
-                <div className="h-360 w-full">
+          </div>
+        </div>
 
-                    <div className="h-32 w-full flex flex-col items-center justify-center overflow-hidden rounded-md">
-                        <div className="w-160 relative">
+        {/* Hero - Countdown */}
+        <div className="flex-1 flex items-center justify-center px-4 py-16">
+          <div className="relative w-full max-w-4xl">
+            {/* Glow effect behind card */}
+            <div className="absolute inset-0 bg-gradient-to-r from-pink-500 via-purple-500 to-cyan-500 rounded-3xl blur-3xl opacity-30 scale-105" />
 
-                            {/* Gradients */}
-                            <div className="absolute inset-x-20 top-0 bg-linear-to-r from-transparent via-indigo-500 to-transparent h-[2px] w-3/4 blur-xs" />
-                            <div className="absolute inset-x-20 top-0 bg-linear-to-r from-transparent via-indigo-500 to-transparent h-px w-3/4" />
-                            <div className="absolute inset-x-60 top-0 bg-linear-to-r from-transparent via-sky-500 to-transparent h-[5px] w-1/4 blur-xs" />
-                            <div className="absolute inset-x-60 top-0 bg-linear-to-r from-transparent via-sky-500 to-transparent h-px w-1/4" />
+            {/* Main card */}
+            <div className="relative rounded-3xl overflow-hidden backdrop-blur-md bg-gray-900/80 border border-white/10 px-8 py-16 md:py-24">
+              {/* Top gradient line */}
+              <div className="absolute top-0 left-1/4 right-1/4 h-px bg-gradient-to-r from-transparent via-pink-500 to-transparent" />
+              <div className="absolute top-0 left-1/3 right-1/3 h-[2px] bg-gradient-to-r from-transparent via-cyan-500 to-transparent blur-sm" />
 
-                            {/* Core component */}
-                            <SparklesCore
-                                background="transparent"
-                                minSize={0.4}
-                                maxSize={1}
-                                particleDensity={1000}
-                                className="w-full h-full"
-                                particleColor="#FFFFFF"
-                            />
+              {/* Countdown */}
+              <Countdown />
 
-                            {/* Radial Gradient to prevent sharp edges */}
-                            <div className="absolute inset-0 w-full h-full bg-black mask-[radial-gradient(350px_200px_at_top,transparent_20%,white)]"></div>
-                        </div>
-                    </div>
-                    <div style={styles} className="bg-white justify-center flex items-center h-28 w-auto mx-2">
-                        <img src={'https://www.theweekendisneverover.com/twino.png'} alt="logo" />
-                    </div>
-                    {/* <div style={main}>
-                        Welcome to the website.
-                    </div> */}
-                    <div className="h-3/4 md:h-1/2 relative mt-20">
-                        <div className="absolute inset-0 h-full w-full bg-linear-to-r from-blue-500 to-teal-500 scale-[.9] bg-red-500 rounded-full blur-3xl" />
-                        <div className="relative shadow-xl bg-gray-900 border border-gray-800  px-10 py-8 h-full overflow-hidden rounded-2xl flex flex-col justify-end items-start">
+              {/* Tagline */}
+              <div className="mt-16 text-center">
+                <p className="text-white/50 text-lg md:text-xl italic">
+                  &ldquo;Good vibes alive, one drink at a time&rdquo;
+                </p>
+              </div>
 
+              {/* Meteors */}
+              <Meteors number={15} />
+            </div>
+          </div>
+        </div>
 
-                            <h1 className="font-bold text-xl text-white mb-4 relative z-50">
-                                It is a 5 oclock somewhere!
-                            </h1>
-
-                            <p className="font-normal text-base text-slate-500 mb-4 relative z-50">
-                                The weekend is never over is a lifestyle committed to keeping good vibes alive one drink at a time. We are an online destination sharing drink and beverage recipes from all over the world. Our home page is a countdown clock to happy hour. Every hour counting down the minutes and seconds left to the next time it is 5 o&apos;clock somewhere around the globe.
-                                Our online Etsy store sells streetwear clothing with our brand name. The idea for our logo was inspired by the American Sign Language (ASL) fingerspelling sign for the letter &ldquo;W&rdquo;, the first letter in the word Weekend.
-                                Follow our journey through never-ending drink recipes from all around the globe. Whether you are working for the weekend or working on the weekend, the weekend is never over when you can take a moment to enjoy a refreshing drink.
-                            </p>
-                            <p className="font-normal text-base text-slate-500 mb-4 relative z-50">
-                                Contact Us - <a href="mailto:TheWeekendIsNeverOver@gmail.com">TheWeekendIsNeverOver@gmail.com</a>
-                            </p>
-
-                            <div style={{ height: '10rem' }}></div>
-
-
-                            {/* <button className="border px-4 py-1 rounded-lg  border-gray-500 text-gray-300">
-                                Explore
-                            </button> */}
-
-                            {/* Meaty part - Meteor effect */}
-                            <Meteors number={20} />
-                        </div>
-                    </div>
-                </div>
-            </TracingBeam>
-        </>
-    );
-}
-
-export default SparklesPreview;
-// import { cn } from "@/utils/cn";
-
-export function NavbarDemo() {
-    return (
-        <div className="relative w-full flex items-center justify-center">
-            <Navbar className="top-2" />
-            <p className="text-black dark:text-white">
-                The Navbar will show on top of the page
+        {/* Footer */}
+        <footer className="w-full px-6 py-8">
+          <div className="max-w-6xl mx-auto text-center space-y-4">
+            <p className="text-white/40 text-sm max-w-xl mx-auto">
+              Follow our journey through never-ending drink recipes from around the globe.
             </p>
-        </div>
-    );
+            <a
+              href="mailto:TheWeekendIsNeverOver@gmail.com"
+              className="inline-block text-white/60 hover:text-white transition-colors duration-300 text-sm"
+            >
+              TheWeekendIsNeverOver@gmail.com
+            </a>
+          </div>
+        </footer>
+      </div>
+    </div>
+  );
 }
-
-function Navbar({ className }: { className?: string }) {
-    const [active, setActive] = useState<string | null>(null);
-    return (
-        <div
-            className={cn("fixed top-10 inset-x-0 max-w-2xl mx-auto z-50", className)}
-        >
-            <Menu setActive={setActive}>
-                <MenuItem setActive={setActive} active={active} item="Services">
-                    <div className="flex flex-col space-y-4 text-sm">
-                        <HoveredLink href="/web-dev">Web Development</HoveredLink>
-                        <HoveredLink href="/interface-design">Interface Design</HoveredLink>
-                        <HoveredLink href="/seo">Search Engine Optimization</HoveredLink>
-                        <HoveredLink href="/branding">Branding</HoveredLink>
-                    </div>
-                </MenuItem>
-                <MenuItem setActive={setActive} active={active} item="Products">
-                    <div className="  text-sm grid grid-cols-2 gap-10 p-4">
-                        <ProductItem
-                            title="Algochurn"
-                            href="https://algochurn.com"
-                            src="https://assets.aceternity.com/demos/algochurn.webp"
-                            description="Prepare for tech interviews like never before."
-                        />
-                        <ProductItem
-                            title="Tailwind Master Kit"
-                            href="https://tailwindmasterkit.com"
-                            src="https://assets.aceternity.com/demos/tailwindmasterkit.webp"
-                            description="Production ready Tailwind css components for your next project"
-                        />
-                        <ProductItem
-                            title="Moonbeam"
-                            href="https://gomoonbeam.com"
-                            src="https://assets.aceternity.com/demos/Screenshot+2024-02-21+at+11.51.31%E2%80%AFPM.png"
-                            description="Never write from scratch again. Go from idea to blog in minutes."
-                        />
-                        <ProductItem
-                            title="Rogue"
-                            href="https://userogue.com"
-                            src="https://assets.aceternity.com/demos/Screenshot+2024-02-21+at+11.47.07%E2%80%AFPM.png"
-                            description="Respond to government RFPs, RFIs and RFQs 10x faster using AI"
-                        />
-                    </div>
-                </MenuItem>
-                <MenuItem setActive={setActive} active={active} item="Pricing">
-                    <div className="flex flex-col space-y-4 text-sm">
-                        <HoveredLink href="/hobby">Hobby</HoveredLink>
-                        <HoveredLink href="/individual">Individual</HoveredLink>
-                        <HoveredLink href="/team">Team</HoveredLink>
-                        <HoveredLink href="/enterprise">Enterprise</HoveredLink>
-                    </div>
-                </MenuItem>
-            </Menu>
-        </div>
-    );
-}
-
