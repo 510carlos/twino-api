@@ -1,25 +1,35 @@
-# Use the official lightweight Node.js 12 image.
-# https://hub.docker.com/_/node
-FROM node:12-slim
+FROM node:20-slim AS base
 
-# Create and change to the app directory.
-WORKDIR /usr/src/app
+# Install pnpm
+RUN corepack enable && corepack prepare pnpm@10.25.0 --activate
 
-# Copy application dependency manifests to the container image.
-# A wildcard is used to ensure both package.json AND package-lock.json are copied.
-# Copying this separately prevents re-running npm install on every code change.
-COPY package*.json ./
-COPY client/package*.json ./client/
-COPY server/package*.json ./server/
+WORKDIR /app
 
-# Install production dependencies.
-RUN npm run install
+# Copy package files
+COPY package.json pnpm-lock.yaml* ./
 
-# Copy local code to the container image.
-COPY . ./
+# Install dependencies
+RUN pnpm install --frozen-lockfile
 
-# build the production front end
-RUN npm run build
+# Copy source
+COPY . .
 
-# Run the web service on container startup.
-CMD [ "npm", "start" ]
+# Build the Next.js app
+RUN pnpm build
+
+# Production image
+FROM node:20-slim AS runner
+RUN corepack enable && corepack prepare pnpm@10.25.0 --activate
+
+WORKDIR /app
+
+ENV NODE_ENV=production
+
+# Copy built app
+COPY --from=base /app/.next/standalone ./
+COPY --from=base /app/.next/static ./.next/static
+COPY --from=base /app/public ./public
+
+EXPOSE 3000
+
+CMD ["node", "server.js"]
