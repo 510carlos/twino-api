@@ -1,14 +1,31 @@
 "use client";
 
+import { useScroll, useTransform, motion } from "framer-motion";
+import { useRef } from "react";
 import { Countdown } from "./Countdown";
 import { Meteors } from "./Meteors";
 import { SparklesCore } from "./sparkles";
 
 export default function Preview() {
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end start"],
+  });
+
+  // Stars move slower than content (parallax depth)
+  const starsY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
+  // Glow moves even slower for more depth
+  const glowY = useTransform(scrollYProgress, [0, 1], ["0%", "15%"]);
+
   return (
-    <div className="min-h-screen bg-black relative overflow-hidden">
-      {/* Star background */}
-      <div className="fixed inset-0 w-full h-full">
+    <div ref={containerRef} className="min-h-screen bg-black relative overflow-hidden">
+      {/* Star background with parallax */}
+      <motion.div
+        className="fixed -top-[30%] left-0 right-0 w-full h-[160%]"
+        style={{ y: starsY }}
+      >
         <SparklesCore
           id="tsparticlesfullpage"
           background="transparent"
@@ -18,7 +35,17 @@ export default function Preview() {
           className="w-full h-full"
           particleColor="#FFFFFF"
         />
-      </div>
+      </motion.div>
+
+      {/* Ambient glow layer with slower parallax */}
+      <motion.div
+        className="fixed -top-[15%] left-0 right-0 h-[130%] pointer-events-none"
+        style={{ y: glowY }}
+      >
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-pink-500/10 rounded-full blur-3xl" />
+        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl" />
+      </motion.div>
+
 
       {/* Main content */}
       <div className="relative z-10 min-h-screen flex flex-col">
@@ -101,15 +128,19 @@ export default function Preview() {
         </header>
 
         {/* ============================================ */}
-        {/* HERO - COUNTDOWN (all sizes) */}
+        {/* NEON LINE + CARDS CONTAINER */}
         {/* ============================================ */}
-        <div className="flex-1 flex items-start md:items-center justify-center px-3 sm:px-4 py-2 sm:py-4 md:py-12 lg:py-16">
-          <div className="relative w-full max-w-none sm:max-w-xl md:max-w-2xl lg:max-w-3xl 2xl:max-w-4xl">
+        <div className="relative flex-1 px-3 sm:px-4">
+          {/* ============================================ */}
+          {/* HERO - COUNTDOWN */}
+          {/* ============================================ */}
+          <div className="relative z-10 flex items-start md:items-center justify-center py-2 sm:py-4 md:py-12 lg:py-16">
+            <div className="relative w-full max-w-none sm:max-w-xl md:max-w-2xl lg:max-w-3xl 2xl:max-w-4xl mx-auto">
             {/* Glow effect behind card */}
             <div className="absolute inset-0 bg-gradient-to-r from-pink-500 via-purple-500 to-cyan-500 rounded-2xl sm:rounded-3xl blur-2xl sm:blur-3xl opacity-30 scale-105" />
 
             {/* Main card */}
-            <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden backdrop-blur-md bg-gray-900/80 border border-white/10 px-4 sm:px-6 md:px-8 lg:px-12 py-12 sm:py-14 md:py-16 lg:py-20 2xl:py-24">
+            <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden backdrop-blur-md bg-gray-900/30 border border-white/10 px-4 sm:px-6 md:px-8 lg:px-12 py-12 sm:py-14 md:py-16 lg:py-20 2xl:py-24">
               {/* Top gradient line */}
               <div className="absolute top-0 left-1/4 right-1/4 h-px bg-gradient-to-r from-transparent via-pink-500 to-transparent" />
               <div className="absolute top-0 left-1/3 right-1/3 h-[2px] bg-gradient-to-r from-transparent via-cyan-500 to-transparent blur-sm" />
@@ -127,60 +158,61 @@ export default function Preview() {
               {/* Meteors */}
               <Meteors number={15} />
             </div>
+            </div>
           </div>
-        </div>
 
-        {/* ============================================ */}
-        {/* ABOUT CARD */}
-        {/* ============================================ */}
-        <div className="px-3 sm:px-4 pb-6 sm:pb-8 md:pb-12">
-          <div className="relative w-full max-w-none sm:max-w-xl md:max-w-2xl lg:max-w-3xl 2xl:max-w-4xl mx-auto">
-            {/* Glow effect behind card */}
-            <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 via-purple-500 to-pink-500 rounded-2xl sm:rounded-3xl blur-2xl sm:blur-3xl opacity-20 scale-105" />
+          {/* ============================================ */}
+          {/* ABOUT CARD */}
+          {/* ============================================ */}
+          <div className="relative z-10 pb-6 sm:pb-8 md:pb-12 mt-6 sm:mt-8 md:mt-0">
+            <div className="relative w-full max-w-none sm:max-w-xl md:max-w-2xl lg:max-w-3xl 2xl:max-w-4xl mx-auto">
+              {/* Glow effect behind card */}
+              <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 via-purple-500 to-pink-500 rounded-2xl sm:rounded-3xl blur-2xl sm:blur-3xl opacity-20 scale-105" />
 
-            {/* About card */}
-            <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden backdrop-blur-md bg-gray-900/80 border border-white/10 px-4 sm:px-6 md:px-8 lg:px-12 py-8 sm:py-10 md:py-12">
-              {/* Top gradient line */}
-              <div className="absolute top-0 left-1/4 right-1/4 h-px bg-gradient-to-r from-transparent via-cyan-500 to-transparent" />
-              <div className="absolute top-0 left-1/3 right-1/3 h-[2px] bg-gradient-to-r from-transparent via-pink-500 to-transparent blur-sm" />
+              {/* About card */}
+              <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden backdrop-blur-md bg-gray-900/30 border border-white/10 px-4 sm:px-6 md:px-8 lg:px-12 py-8 sm:py-10 md:py-12">
+                {/* Top gradient line */}
+                <div className="absolute top-0 left-1/4 right-1/4 h-px bg-gradient-to-r from-transparent via-cyan-500 to-transparent" />
+                <div className="absolute top-0 left-1/3 right-1/3 h-[2px] bg-gradient-to-r from-transparent via-pink-500 to-transparent blur-sm" />
 
-              <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-4 sm:mb-6">
-                It is 5 o&apos;clock somewhere!
-              </h2>
+                <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-4 sm:mb-6">
+                  It is 5 o&apos;clock somewhere!
+                </h2>
 
-              <div className="space-y-4 text-white/60 text-sm sm:text-base md:text-lg leading-relaxed">
-                <p>
-                  The weekend is never over is a lifestyle committed to keeping good vibes alive one drink at a time. We are an online destination sharing drink and beverage recipes from all over the world.
-                </p>
-                <p>
-                  Our home page is a countdown clock to happy hour. Every hour counting down the minutes and seconds left to the next time it is 5 o&apos;clock somewhere around the globe.
-                </p>
-                <p>
-                  Our online Etsy store sells streetwear clothing with our brand name. The idea for our logo was inspired by the American Sign Language (ASL) fingerspelling sign for the letter &ldquo;W&rdquo;, the first letter in the word Weekend.
-                </p>
-                <p>
-                  Follow our journey through never-ending drink recipes from all around the globe. Whether you are working for the weekend or working on the weekend, the weekend is never over when you can take a moment to enjoy a refreshing drink.
-                </p>
-              </div>
+                <div className="space-y-4 text-white/60 text-sm sm:text-base md:text-lg leading-relaxed">
+                  <p>
+                    The weekend is never over is a lifestyle committed to keeping good vibes alive one drink at a time. We are an online destination sharing drink and beverage recipes from all over the world.
+                  </p>
+                  <p>
+                    Our home page is a countdown clock to happy hour. Every hour counting down the minutes and seconds left to the next time it is 5 o&apos;clock somewhere around the globe.
+                  </p>
+                  <p>
+                    Our online Etsy store sells streetwear clothing with our brand name. The idea for our logo was inspired by the American Sign Language (ASL) fingerspelling sign for the letter &ldquo;W&rdquo;, the first letter in the word Weekend.
+                  </p>
+                  <p>
+                    Follow our journey through never-ending drink recipes from all around the globe. Whether you are working for the weekend or working on the weekend, the weekend is never over when you can take a moment to enjoy a refreshing drink.
+                  </p>
+                </div>
 
-              {/* Contact */}
-              <div className="mt-6 sm:mt-8 pt-6 sm:pt-8 border-t border-white/10">
-                <p className="text-white/40 text-xs sm:text-sm mb-2">Contact Us</p>
-                <a
-                  href="mailto:TheWeekendIsNeverOver@gmail.com"
-                  className="text-white/80 hover:text-white transition-colors text-sm sm:text-base"
-                >
-                  TheWeekendIsNeverOver@gmail.com
-                </a>
+                {/* Contact */}
+                <div className="mt-6 sm:mt-8 pt-6 sm:pt-8 border-t border-white/10">
+                  <p className="text-white/40 text-xs sm:text-sm mb-2">Contact Us</p>
+                  <a
+                    href="mailto:TheWeekendIsNeverOver@gmail.com"
+                    className="text-white/80 hover:text-white transition-colors text-sm sm:text-base"
+                  >
+                    TheWeekendIsNeverOver@gmail.com
+                  </a>
+                </div>
               </div>
             </div>
           </div>
         </div>
 
         {/* ============================================ */}
-        {/* FOOTER (all sizes) */}
+        {/* FOOTER */}
         {/* ============================================ */}
-        <footer className="w-full px-4 py-4 sm:py-6 md:py-8">
+        <footer className="w-full px-4 py-4 sm:py-6 md:py-8 mt-auto">
           <div className="text-center">
             <p className="text-white/30 text-[10px] sm:text-xs">
               &copy; {new Date().getFullYear()} The Weekend Is Never Over

@@ -1,9 +1,17 @@
+"use client";
+
 import { ClassValue, clsx } from "clsx";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { twMerge } from "tailwind-merge";
 
 export function cn(...inputs: ClassValue[]) {
     return twMerge(clsx(inputs));
+}
+
+interface MeteorStyle {
+    left: string;
+    animationDelay: string;
+    animationDuration: string;
 }
 
 export const Meteors = ({
@@ -13,10 +21,25 @@ export const Meteors = ({
     number?: number;
     className?: string;
 }) => {
-    const meteors = new Array(number || 20).fill(true);
+    const [meteorStyles, setMeteorStyles] = useState<MeteorStyle[]>([]);
+
+    useEffect(() => {
+        const count = number || 20;
+        const styles = Array.from({ length: count }, () => ({
+            left: Math.floor(Math.random() * 800 - 400) + "px",
+            animationDelay: (Math.random() * 0.6 + 0.2).toFixed(2) + "s",
+            animationDuration: Math.floor(Math.random() * 8 + 2) + "s",
+        }));
+        setMeteorStyles(styles);
+    }, [number]);
+
+    if (meteorStyles.length === 0) {
+        return null;
+    }
+
     return (
         <>
-            {meteors.map((el, idx) => (
+            {meteorStyles.map((style, idx) => (
                 <span
                     key={"meteor" + idx}
                     className={cn(
@@ -26,9 +49,9 @@ export const Meteors = ({
                     )}
                     style={{
                         top: 0,
-                        left: Math.floor(Math.random() * (400 - -400) + -400) + "px",
-                        animationDelay: Math.random() * (0.8 - 0.2) + 0.2 + "s",
-                        animationDuration: Math.floor(Math.random() * (10 - 2) + 2) + "s",
+                        left: style.left,
+                        animationDelay: style.animationDelay,
+                        animationDuration: style.animationDuration,
                     }}
                 ></span>
             ))}
