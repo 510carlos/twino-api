@@ -56,16 +56,16 @@ function SparklesPreview() {
                     <a href="https://theweekendisneverover.com/" className="pr-5">Home</a>
                     <a href="https://www.etsy.com/shop/WeekendIsNeverOver" className="pl-5">Shop</a>
                 </div>
-                <div className="h-[90rem] w-full">
+                <div className="h-360 w-full">
 
-                    <div className="h-[8rem] w-full flex flex-col items-center justify-center overflow-hidden rounded-md">
-                        <div className="w-[40rem] relative">
+                    <div className="h-32 w-full flex flex-col items-center justify-center overflow-hidden rounded-md">
+                        <div className="w-160 relative">
 
                             {/* Gradients */}
-                            <div className="absolute inset-x-20 top-0 bg-gradient-to-r from-transparent via-indigo-500 to-transparent h-[2px] w-3/4 blur-sm" />
-                            <div className="absolute inset-x-20 top-0 bg-gradient-to-r from-transparent via-indigo-500 to-transparent h-px w-3/4" />
-                            <div className="absolute inset-x-60 top-0 bg-gradient-to-r from-transparent via-sky-500 to-transparent h-[5px] w-1/4 blur-sm" />
-                            <div className="absolute inset-x-60 top-0 bg-gradient-to-r from-transparent via-sky-500 to-transparent h-px w-1/4" />
+                            <div className="absolute inset-x-20 top-0 bg-linear-to-r from-transparent via-indigo-500 to-transparent h-[2px] w-3/4 blur-xs" />
+                            <div className="absolute inset-x-20 top-0 bg-linear-to-r from-transparent via-indigo-500 to-transparent h-px w-3/4" />
+                            <div className="absolute inset-x-60 top-0 bg-linear-to-r from-transparent via-sky-500 to-transparent h-[5px] w-1/4 blur-xs" />
+                            <div className="absolute inset-x-60 top-0 bg-linear-to-r from-transparent via-sky-500 to-transparent h-px w-1/4" />
 
                             {/* Core component */}
                             <SparklesCore
@@ -78,17 +78,17 @@ function SparklesPreview() {
                             />
 
                             {/* Radial Gradient to prevent sharp edges */}
-                            <div className="absolute inset-0 w-full h-full bg-black [mask-image:radial-gradient(350px_200px_at_top,transparent_20%,white)]"></div>
+                            <div className="absolute inset-0 w-full h-full bg-black mask-[radial-gradient(350px_200px_at_top,transparent_20%,white)]"></div>
                         </div>
                     </div>
-                    <div style={styles} className="bg-white justify-center flex items-center h-[7rem] w-auto mx-2">
+                    <div style={styles} className="bg-white justify-center flex items-center h-28 w-auto mx-2">
                         <img src={'https://www.theweekendisneverover.com/twino.png'} alt="logo" />
                     </div>
                     {/* <div style={main}>
                         Welcome to the website.
                     </div> */}
                     <div className="h-3/4 md:h-1/2 relative mt-20">
-                        <div className="absolute inset-0 h-full w-full bg-gradient-to-r from-blue-500 to-teal-500 scale-[.9] bg-red-500 rounded-full blur-3xl" />
+                        <div className="absolute inset-0 h-full w-full bg-linear-to-r from-blue-500 to-teal-500 scale-[.9] bg-red-500 rounded-full blur-3xl" />
                         <div className="relative shadow-xl bg-gray-900 border border-gray-800  px-10 py-8 h-full overflow-hidden rounded-2xl flex flex-col justify-end items-start">
 
 
