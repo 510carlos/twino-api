@@ -209,7 +209,7 @@ export default function Component() {
     return (
         <div className="min-h-screen bg-[#050505] text-[#e0e0e0]">
             {showConfetti && <Confetti colors={['#00ffff', '#ff00ff', '#ffff00']} />}
-            <style jsx global>{`
+            <style>{`
         @keyframes neon-pulse {
           0% { text-shadow: 0 0 5px #00ffff, 0 0 10px #00ffff, 0 0 20px #00ffff; }
           100% { text-shadow: 0 0 2px #00ffff, 0 0 5px #00ffff, 0 0 10px #00ffff; }
