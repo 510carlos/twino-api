@@ -5,7 +5,7 @@ import Link from "next/link";
 import React from "react";
 
 const transition = {
-    type: "spring",
+    type: "spring" as const,
     mass: 0.5,
     damping: 11.5,
     stiffness: 100,
@@ -49,7 +49,7 @@ export const MenuItem = ({
                                     layout // layout ensures smooth animation
                                     className="w-max h-full p-4"
                                 >
-                                    {children}
+                                    <div>{children}</div>
                                 </motion.div>
                             </motion.div>
                         </div>
