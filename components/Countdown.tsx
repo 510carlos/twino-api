@@ -104,11 +104,11 @@ export function Countdown() {
   const pad = (n: number) => n.toString().padStart(2, "0");
 
   return (
-    <div className="flex flex-col items-center justify-center text-center">
+    <div className="flex flex-col items-center justify-center text-center px-2 sm:px-4">
       {/* Countdown display */}
       <div className="relative">
         <div
-          className="text-7xl md:text-9xl font-bold tracking-wider font-[family-name:var(--font-orbitron)]"
+          className="text-5xl sm:text-7xl md:text-8xl lg:text-9xl 2xl:text-[10rem] font-bold tracking-wider font-[family-name:var(--font-orbitron)]"
           style={{
             background: "linear-gradient(135deg, #ff00ff, #00ffff)",
             WebkitBackgroundClip: "text",
@@ -123,14 +123,14 @@ export function Countdown() {
       </div>
 
       {/* Label */}
-      <p className="text-white/70 text-lg md:text-xl mt-4 tracking-wide">
+      <p className="text-white/70 text-sm sm:text-base md:text-lg lg:text-xl 2xl:text-2xl mt-2 sm:mt-3 md:mt-4 tracking-wide">
         until 5 o&apos;clock somewhere
       </p>
 
       {/* Location and drink */}
       {location && mounted && (
-        <div className="mt-8 space-y-2">
-          <p className="text-2xl md:text-3xl font-light text-white">
+        <div className="mt-4 sm:mt-6 md:mt-8 space-y-1 sm:space-y-2">
+          <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl 2xl:text-4xl font-light text-white">
             <span
               className="font-semibold"
               style={{
@@ -143,7 +143,7 @@ export function Countdown() {
               {location.drink}
             </span>
           </p>
-          <p className="text-white/60 text-lg">
+          <p className="text-white/60 text-sm sm:text-base md:text-lg 2xl:text-xl">
             is the drink of choice in {location.city}, {location.country}
           </p>
         </div>
