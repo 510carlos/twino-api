@@ -299,7 +299,7 @@ export default function Component() {
                 {slides.map((slide, index) => (
                     <div
                         key={index}
-                        ref={(el) => (slidesRef.current[index] = el)}
+                        ref={(el) => { slidesRef.current[index] = el }}
                         className="min-h-screen flex flex-col items-center justify-center px-4"
                     >
                         <motion.div
