@@ -6,9 +6,9 @@ import { env } from "./env.mjs"
  * @type {import('next').NextConfig}
  */
 const config = withPlugins([[withBundleAnalyzer({ enabled: env.ANALYZE })]], {
+  output: 'standalone',
   reactStrictMode: true,
-  experimental: { instrumentationHook: true },
-  rewrites() {
+    rewrites() {
     return [
       { source: "/healthz", destination: "/api/health" },
       { source: "/api/healthz", destination: "/api/health" },

@@ -27,7 +27,7 @@ const LogoPage = () => {
     return (
         <div className="relative  w-full">
             <FloatingNav navItems={navItems} />
-            <div className="h-[100rem] relative w-full bg-black flex flex-col items-center justify-center overflow-hidden rounded-md">
+            <div className="h-400 relative w-full bg-black flex flex-col items-center justify-center overflow-hidden rounded-md">
                 <div className="w-full absolute inset-0 h-screen">
                     <SparklesCore
                         id="tsparticlesfullpage"
