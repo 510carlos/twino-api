@@ -1,31 +1,14 @@
 import { Metadata } from "next"
-// import LogoPage from "components/LogoPage"
-import Preview from "../components/Preview"
-// import Recipe from "../components/Recipe"
-
-
+import { FiveOclockDeco } from "../components/FiveOclockDeco/FiveOclockDeco"
 
 export const metadata: Metadata = {
-  title: "The weekend is never over!",
+  title: "The Weekend Is Never Over",
+  description: "It is 5 o'clock somewhere. Curated drinks & timeless games for the sophisticated reveler.",
   twitter: {
     card: "summary_large_image",
   },
-  // openGraph: {
-  //   url: "https://next-enterprise.vercel.app/",
-  //   images: [
-  //     {
-  //       width: 1200,
-  //       height: 630,
-  //       url: "https://raw.githubusercontent.com/Blazity/next-enterprise/main/project-logo.png",
-  //     },
-  //   ],
-  // },
 }
 
 export default function Web() {
-  return (
-    <>
-      <Preview />
-    </>
-  )
+  return <FiveOclockDeco />
 }
