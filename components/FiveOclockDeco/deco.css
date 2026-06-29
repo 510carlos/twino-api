@@ -522,3 +522,8 @@
   width: 60%; aspect-ratio: 1 / 1; border-radius: 50%; object-fit: cover;
   box-shadow: 0 0 0 2px var(--gold);
 }
+
+/* Game card title as link to its specific game */
+.game-title-link { color: inherit; text-decoration: none; transition: color 0.3s; }
+.game-title-link:hover { color: var(--gold-text); }
+.card-img-container { cursor: pointer; }

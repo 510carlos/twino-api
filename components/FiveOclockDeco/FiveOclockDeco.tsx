@@ -299,17 +299,20 @@ export function FiveOclockDeco() {
             <p className="game-subtitle reveal-item">Gather your friends. Game on.</p>
             <div className="cards-grid">
               {[
-                { img: "card-crazy-eights", title: "Crazy Eights", desc: "A fast-paced classic of matching suits and numbers." },
-                { img: "card-translation", title: "Translation Cards", desc: "Learn the local lingo while you sip your cocktail." },
-                { img: "card-loteria", title: "Lotería", desc: "A game of chance, beautiful imagery, and quick wits." },
-              ].map((g) => (
-                <div className="deco-panel game-card reveal-item" key={g.img}>
-                  <div className="card-img-container"><img src={`/games/${g.img}.webp`} alt={g.title} /></div>
-                  <h3>{g.title}</h3>
-                  <p>{g.desc}</p>
-                  <a href={GAMES_URL} className="btn">Play</a>
-                </div>
-              ))}
+                { img: "card-crazy-eights", title: "Crazy Eights", path: "/crazy-eights", desc: "A fast-paced classic of matching suits and numbers." },
+                { img: "card-translation", title: "Translation Cards", path: "/translation-cards", desc: "Learn the local lingo while you sip your cocktail." },
+                { img: "card-loteria", title: "Lotería", path: "/loteria", desc: "A game of chance, beautiful imagery, and quick wits." },
+              ].map((g) => {
+                const gameUrl = `${GAMES_URL}${g.path}`
+                return (
+                  <div className="deco-panel game-card reveal-item" key={g.img}>
+                    <a href={gameUrl} className="card-img-container" aria-label={g.title}><img src={`/games/${g.img}.webp`} alt={g.title} /></a>
+                    <h3><a href={gameUrl} className="game-title-link">{g.title}</a></h3>
+                    <p>{g.desc}</p>
+                    <a href={gameUrl} className="btn">Play</a>
+                  </div>
+                )
+              })}
             </div>
             <p className="no-account-note reveal-item">No account needed — play in seconds.</p>
           </section>
