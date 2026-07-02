@@ -1,4 +1,4 @@
-import "styles/tailwind.css"
+import "./globals.css"
 import { Orbitron, Cinzel, Cormorant_Garamond } from "next/font/google"
 
 const orbitron = Orbitron({

@@ -1,14 +1,7 @@
-import withBundleAnalyzer from "@next/bundle-analyzer"
-import withPlugins from "next-compose-plugins"
-import { env } from "./env.mjs"
-
-/**
- * @type {import('next').NextConfig}
- */
-const config = withPlugins([[withBundleAnalyzer({ enabled: env.ANALYZE })]], {
-  output: 'standalone',
+/** @type {import('next').NextConfig} */
+const nextConfig = {
   reactStrictMode: true,
-    rewrites() {
+  rewrites() {
     return [
       { source: "/healthz", destination: "/api/health" },
       { source: "/api/healthz", destination: "/api/health" },
@@ -16,20 +9,6 @@ const config = withPlugins([[withBundleAnalyzer({ enabled: env.ANALYZE })]], {
       { source: "/ping", destination: "/api/health" },
     ]
   },
-  images: {
-    remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: 'assets.aceternity.com',
-        port: '',
-      },
-      {
-        protocol: 'https',
-        hostname: 'www.theweekendisneverover.com',
-        port: '',
-      },
-    ],
-  },
-})
+}
 
-export default config
+export default nextConfig

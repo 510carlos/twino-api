@@ -27,9 +27,9 @@ export const getCurrentTimeZone = () => {
   return currentZone || "No matching time zone found"
 }
 
-export const getNextTimeZone = (currentZone) => {
+export const getNextTimeZone = (currentZone: string) => {
   const zones = Object.keys(cities)
   const currentIndex = zones.indexOf(currentZone)
   const nextIndex = (currentIndex + 1) % zones.length
-  return zones[nextIndex]
+  return zones[nextIndex] ?? zones[0] ?? "america/los_angeles"
 }

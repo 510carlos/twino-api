@@ -61,8 +61,8 @@ export function FiveOclockDeco() {
       const { minutes, seconds } = calculateTimeLeft()
       const mStr = String(minutes).padStart(2, "0")
       const sStr = String(seconds).padStart(2, "0")
-      roll(m1.current, +mStr[0]); roll(m2.current, +mStr[1])
-      roll(s1.current, +sStr[0]); roll(s2.current, +sStr[1])
+      roll(m1.current, Number(mStr[0] ?? 0)); roll(m2.current, Number(mStr[1] ?? 0))
+      roll(s1.current, Number(sStr[0] ?? 0)); roll(s2.current, Number(sStr[1] ?? 0))
       if (seconds !== lastSec && !prefersReduced.matches && timerRef.current) {
         timerRef.current.classList.remove("tick-pulse")
         void timerRef.current.offsetWidth
@@ -196,7 +196,7 @@ export function FiveOclockDeco() {
     return () => cleanups.forEach((fn) => fn())
   }, [])
 
-  const digitCol = (ref: RefObject<HTMLDivElement>) => (
+  const digitCol = (ref: RefObject<HTMLDivElement | null>) => (
     <div className="digit-window">
       <div className="digit-col" ref={ref}>
         {Array.from({ length: 10 }, (_, n) => (<div className="digit-num" key={n}>{n}</div>))}
