@@ -9,6 +9,7 @@ apps/
 out/
 build/
 dist/
+storybook-static/
 *.tsbuildinfo
 next-env.d.ts
 

@@ -19,5 +19,5 @@ export default defineConfig([
       ],
     },
   },
-  globalIgnores([".next/**", "node_modules/**", "out/**", "build/**", "dist/**"]),
+  globalIgnores([".next/**", "node_modules/**", "storybook-static/**", "out/**", "build/**", "dist/**"]),
 ])
