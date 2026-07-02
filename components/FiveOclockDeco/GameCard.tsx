@@ -10,8 +10,8 @@ export function GameCard({ game }: GameCardProps) {
 
   return (
     <div className="deco-panel game-card reveal-item">
-      <a href={gameUrl} className="card-img-container" aria-label={game.title}>
-        <img src={`/games/${game.img}.webp`} alt={game.title} />
+      <a href={gameUrl} className="card-img-container" aria-label={`Open ${game.title}`}>
+        <img src={`/games/${game.img}.webp`} alt="" />
       </a>
       <h3>
         <a href={gameUrl} className="game-title-link">
@@ -19,7 +19,7 @@ export function GameCard({ game }: GameCardProps) {
         </a>
       </h3>
       <p>{game.desc}</p>
-      <a href={gameUrl} className="btn">
+      <a href={gameUrl} className="btn" aria-label={`Play ${game.title}`}>
         Play
       </a>
     </div>

@@ -30,4 +30,24 @@ test.describe("homepage", () => {
     await expect(response).toBeOK()
     await expect(response.json()).resolves.toEqual({ status: "ok" })
   })
+
+  test("does not expose placeholder links and supports keyboard focus", async ({ page }) => {
+    await page.goto("/")
+
+    await expect(page.locator('a[href="#"]')).toHaveCount(0)
+    await expect(page.getByLabel("Email address")).toBeVisible()
+
+    await page.keyboard.press("Tab")
+    await expect(page.locator(":focus")).toBeVisible()
+  })
+
+  test("captures visual smoke screenshots", async ({ page }, testInfo) => {
+    await page.goto("/")
+    await expect(page.getByRole("heading", { name: /the weekend is never over/i })).toBeVisible()
+
+    await page.screenshot({
+      fullPage: true,
+      path: testInfo.outputPath(`home-${testInfo.project.name}.png`),
+    })
+  })
 })

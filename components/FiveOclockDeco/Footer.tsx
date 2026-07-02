@@ -1,4 +1,9 @@
-const socials = ["Instagram", "Facebook", "X", "Pinterest"]
+import Link from "next/link"
+
+const links = [
+  { label: "Games", href: "https://games.theweekendisneverover.com" },
+  { label: "Home", href: "/" },
+]
 
 export function Footer() {
   return (
@@ -13,24 +18,26 @@ export function Footer() {
             </div>
             <div className="copyright">&copy; 2026 All Rights Reserved.</div>
           </div>
-          <div className="footer-socials">
-            {socials.map((social) => (
-              <a href="#" aria-label={social} key={social}>
-                <svg className="social-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <circle cx="12" cy="12" r="10" />
-                </svg>
-              </a>
-            ))}
-          </div>
+          <nav className="footer-socials" aria-label="Footer">
+            {links.map((link) =>
+              link.href.startsWith("/") ? (
+                <Link href={link.href} key={link.label}>
+                  {link.label}
+                </Link>
+              ) : (
+                <a href={link.href} key={link.label}>
+                  {link.label}
+                </a>
+              )
+            )}
+          </nav>
           <div className="footer-newsletter">
             <span className="newsletter-text">Newsletter for exclusive offers and updates.</span>
             <form className="newsletter-form" onSubmit={(event) => event.preventDefault()}>
               <input type="email" placeholder="Enter your email" required aria-label="Email address" />
               <button type="submit">Subscribe</button>
             </form>
-            <div className="footer-links">
-              <a href="#">Terms &amp; Conditions</a> | <a href="#">Privacy Policy</a>
-            </div>
+            <p className="footer-links">No account needed. No newsletter signup is submitted yet.</p>
           </div>
         </div>
       </div>

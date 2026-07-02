@@ -1,0 +1,66 @@
+:root {
+  --green-darkest: #1a211c;
+  --green: #2d4736;
+  --gold-deep: #887657;
+  --gold: #a89368;
+  --gold-text: #c5b382;
+  --cream: #dccda9;
+
+  --font-heading: var(--font-cinzel), "Cinzel", serif;
+  --font-body: var(--font-cormorant), "Cormorant Garamond", serif;
+
+  --content-max-width: 1200px;
+  --content-4k-width: 1400px;
+
+  --ease-premium: cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+/* --- Accessibility & Resets --- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+*:focus-visible {
+  outline: 2px solid var(--gold-text);
+  outline-offset: 4px;
+  border-radius: 2px;
+}
+
+::selection {
+  background-color: var(--gold);
+  color: var(--green-darkest);
+}
+::-moz-selection {
+  background-color: var(--gold);
+  color: var(--green-darkest);
+}
+
+html {
+  scrollbar-width: thin;
+  scrollbar-color: var(--gold-deep) var(--green-darkest);
+}
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--green-darkest);
+}
+::-webkit-scrollbar-thumb {
+  background-color: var(--gold-deep);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--gold);
+}
+
+body {
+  background-color: var(--green-darkest);
+  color: var(--cream);
+  font-family: var(--font-body);
+  font-size: 18px;
+  line-height: 1.5;
+  overflow-x: hidden;
+  position: relative;
+}

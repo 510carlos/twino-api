@@ -4,6 +4,12 @@ Twino API is the public homepage for **The Weekend Is Never Over**. The app is a
 
 The codebase is intentionally lean. It does not include the old enterprise template, a separate backend server, Jest, or unused API scaffolding.
 
+![Desktop homepage screenshot](public/readme/home-desktop.webp)
+
+<p align="center">
+  <img src="public/readme/home-mobile.webp" alt="Mobile homepage screenshot" width="280" />
+</p>
+
 ## What Runs Here
 
 | Surface                                        | Purpose                                        |
@@ -14,28 +20,41 @@ The codebase is intentionally lean. It does not include the old enterprise templ
 
 ## Repository Layout
 
-| Path                         | Purpose                                                         |
-| ---------------------------- | --------------------------------------------------------------- |
-| `app/page.tsx`               | Next.js home route that renders the landing experience          |
-| `app/layout.tsx`             | Root layout and Google font wiring                              |
-| `app/api/health/route.ts`    | Minimal health endpoint                                         |
-| `components/FiveOclockDeco/` | Landing page UI components, data, styles, and Storybook stories |
-| `components/Countdown/`      | Time-zone and countdown helpers                                 |
-| `public/drinks/`             | Drink images used by the countdown panels                       |
-| `public/flags/`              | Flag assets keyed by country                                    |
-| `public/games/`              | Game card images linking to table games                         |
-| `tests/e2e/`                 | Playwright smoke tests                                          |
-| `.storybook/`                | Storybook configuration                                         |
+| Path                         | Purpose                                                                |
+| ---------------------------- | ---------------------------------------------------------------------- |
+| `app/page.tsx`               | Next.js home route that renders the landing experience                 |
+| `app/layout.tsx`             | Root layout and Google font wiring                                     |
+| `app/api/health/route.ts`    | Minimal health endpoint                                                |
+| `components/FiveOclockDeco/` | Landing page UI components, hooks, data, styles, and Storybook stories |
+| `components/Countdown/`      | Time-zone and countdown helpers                                        |
+| `public/drinks/`             | Drink images used by the countdown panels                              |
+| `public/flags/`              | Flag assets keyed by country                                           |
+| `public/games/`              | Game card images linking to table games                                |
+| `public/readme/`             | README screenshots generated from the app                              |
+| `tests/e2e/`                 | Playwright smoke tests                                                 |
+| `.storybook/`                | Storybook configuration                                                |
 
 ## Component Shape
 
 The landing page is split into small components so the UI can be documented and tested in isolation:
 
-- `FiveOclockDeco.tsx` owns client state, countdown ticking, scroll reveal, parallax, and pointer effects.
+- `FiveOclockDeco.tsx` composes the page and wires focused hooks together.
+- `useCountdownLocation.ts`, `useDecoMotion.ts`, `usePointerEffects.ts`, and `useParticles.ts` hold the imperative client behavior.
 - `HeroSection.tsx` composes the countdown, location, and drink panels.
 - `CountdownPanel.tsx`, `LocationPanel.tsx`, `DrinkPanel.tsx`, and `GameCard.tsx` are presentational components.
 - `GameNightSection.tsx`, `AboutSection.tsx`, `Header.tsx`, `Footer.tsx`, and `Atmosphere.tsx` hold page sections.
 - `data.ts` maps time zones, drinks, flags, and game card metadata into UI-ready data.
+- `validateData.ts` checks that static mappings reference valid entries.
+
+## Styling
+
+`components/FiveOclockDeco/deco.css` is only an import manifest. The actual styles are split by concern:
+
+- `base.css` - tokens, reset, focus, body, and scrollbar styles
+- `atmosphere.css` - film grain, vignette, sunburst, particles, and side fans
+- `components.css` - typography utilities, buttons, panels, and reveal classes
+- `header.css`, `hero.css`, `game-sections.css`, and `footer.css` - page sections
+- `motion.css` - reduced-motion fallbacks
 
 ## Development
 
@@ -69,12 +88,16 @@ The e2e suite currently verifies:
 - The homepage renders the main sections.
 - Game cards link to `https://games.theweekendisneverover.com`.
 - `/api/health` returns `{ "status": "ok" }`.
+- Placeholder `#` links are not present.
+- The newsletter field is keyboard-reachable and labelled.
+- Static drink, flag, and game asset references resolve to files.
+- Desktop and mobile visual smoke screenshots can be captured.
 
 Add unit tests later only if the countdown/time-zone helpers become complex enough to need isolated edge-case coverage.
 
 ## Storybook
 
-Storybook uses the Vite-based Next.js framework. The current stories cover the reusable art-deco panels and game card component.
+Storybook uses the Vite-based Next.js framework. The current stories cover the reusable art-deco panels, long-text states, fallback assets, the hero, game night, and footer.
 
 ```bash
 corepack pnpm storybook
@@ -86,7 +109,7 @@ Open `http://localhost:6006`.
 
 The site deploys on Vercel from this repository.
 
-The canonical branch is `main`. `master` currently points at the same commit for compatibility while the deployment settings are cleaned up.
+The canonical branch is `main`. GitHub and Vercel both use `main` for production.
 
 ## Relationship To Table Games
 

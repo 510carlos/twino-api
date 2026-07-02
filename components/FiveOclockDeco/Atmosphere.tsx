@@ -17,6 +17,7 @@ export function Atmosphere() {
             viewBox="0 0 100 1000"
             preserveAspectRatio="none"
             xmlns="http://www.w3.org/2000/svg"
+            focusable="false"
           >
             <g stroke="var(--gold-deep)" strokeWidth="1" fill="none" opacity="0.4">
               {[10, 30, 50, 70, 90].map((x) => (
