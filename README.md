@@ -126,7 +126,7 @@ The canonical branch is `main`. GitHub and Vercel both use `main` for production
 
 The footer intentionally does not include newsletter signup. Add it only after there is a real email provider, working mailbox routing, and an updated Privacy Policy.
 
-The Privacy and Terms pages list `privacy@theweekendisneverover.com` and `legal@theweekendisneverover.com`. The domain has Mailgun MX records, but mailbox routing should still be verified operationally before relying on those addresses for user workflows.
+The Privacy and Terms pages list `theweekendisneverover@gmail.com`, which is the current working contact email. Domain-specific aliases such as `privacy@theweekendisneverover.com` or `legal@theweekendisneverover.com` should only be published after mailbox routing is configured and tested.
 
 ## Relationship To Table Games
 

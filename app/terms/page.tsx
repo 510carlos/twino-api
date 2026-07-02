@@ -90,7 +90,7 @@ export default function TermsPage() {
           },
           {
             title: "Contact",
-            body: ["For questions about these Terms, contact legal@theweekendisneverover.com."],
+            body: ["For questions about these Terms, contact theweekendisneverover@gmail.com."],
           },
         ]}
       />

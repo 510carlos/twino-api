@@ -80,7 +80,7 @@ export default function PrivacyPage() {
           },
           {
             title: "Contact",
-            body: ["For privacy questions or requests, contact privacy@theweekendisneverover.com."],
+            body: ["For privacy questions or requests, contact theweekendisneverover@gmail.com."],
           },
         ]}
       />
