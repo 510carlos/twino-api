@@ -23,7 +23,7 @@ export function FiveOclockDeco() {
       <Atmosphere />
       <div className="container">
         <Header />
-        <main>
+        <main id="main-content">
           <HeroSection location={location} digitRefs={digitRefs} timerRef={timerRef} />
           <GameNightSection />
           <AboutSection />

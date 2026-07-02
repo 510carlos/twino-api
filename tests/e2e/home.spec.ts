@@ -35,10 +35,13 @@ test.describe("homepage", () => {
     await page.goto("/")
 
     await expect(page.locator('a[href="#"]')).toHaveCount(0)
-    await expect(page.getByLabel("Email address")).toBeVisible()
+    await expect(page.getByRole("button", { name: /subscribe/i })).toHaveCount(0)
+    await expect(page.getByLabel("Email address")).toHaveCount(0)
+    await expect(page.getByRole("link", { name: "Privacy" })).toHaveAttribute("href", "/privacy")
+    await expect(page.getByRole("link", { name: "Terms" })).toHaveAttribute("href", "/terms")
 
     await page.keyboard.press("Tab")
-    await expect(page.locator(":focus")).toBeVisible()
+    await expect(page.locator(":focus")).toHaveText(/skip to content/i)
   })
 
   test("captures visual smoke screenshots", async ({ page }, testInfo) => {

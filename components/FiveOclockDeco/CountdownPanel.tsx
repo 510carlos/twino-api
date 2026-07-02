@@ -10,9 +10,9 @@ type CountdownPanelProps = {
 
 export function CountdownPanel({ cityName, digitRefs, timerRef }: CountdownPanelProps) {
   return (
-    <div className="deco-panel panel-countdown">
+    <div className="deco-panel panel-countdown" aria-label={`Countdown to 5 o'clock in ${cityName}`}>
       <div className="panel-label">COUNTDOWN</div>
-      <div className="countdown-time solid-gold-text" id="timer" ref={timerRef} aria-live="polite">
+      <div className="countdown-time solid-gold-text" id="timer" ref={timerRef} aria-hidden="true">
         <DigitColumn digitRef={digitRefs.m1} />
         <DigitColumn digitRef={digitRefs.m2} />
         <span className="colon">:</span>

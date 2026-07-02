@@ -15,24 +15,32 @@ The codebase is intentionally lean. It does not include the old enterprise templ
 | Surface                                        | Purpose                                        |
 | ---------------------------------------------- | ---------------------------------------------- |
 | `/`                                            | Public landing page                            |
+| `/privacy`                                     | Privacy Policy                                 |
+| `/terms`                                       | Terms & Conditions                             |
+| `/robots.txt`                                  | Search crawler policy                          |
+| `/sitemap.xml`                                 | Search sitemap                                 |
 | `/api/health`                                  | Health check used by uptime/deployment tooling |
 | `/health`, `/healthz`, `/api/healthz`, `/ping` | Rewrites to `/api/health`                      |
 
 ## Repository Layout
 
-| Path                         | Purpose                                                                |
-| ---------------------------- | ---------------------------------------------------------------------- |
-| `app/page.tsx`               | Next.js home route that renders the landing experience                 |
-| `app/layout.tsx`             | Root layout and Google font wiring                                     |
-| `app/api/health/route.ts`    | Minimal health endpoint                                                |
-| `components/FiveOclockDeco/` | Landing page UI components, hooks, data, styles, and Storybook stories |
-| `components/Countdown/`      | Time-zone and countdown helpers                                        |
-| `public/drinks/`             | Drink images used by the countdown panels                              |
-| `public/flags/`              | Flag assets keyed by country                                           |
-| `public/games/`              | Game card images linking to table games                                |
-| `public/readme/`             | README screenshots generated from the app                              |
-| `tests/e2e/`                 | Playwright smoke tests                                                 |
-| `.storybook/`                | Storybook configuration                                                |
+| Path                              | Purpose                                                                |
+| --------------------------------- | ---------------------------------------------------------------------- |
+| `app/page.tsx`                    | Next.js home route that renders the landing experience                 |
+| `app/layout.tsx`                  | Root layout and Google font wiring                                     |
+| `app/api/health/route.ts`         | Minimal health endpoint                                                |
+| `app/privacy/`, `app/terms/`      | Legal pages                                                            |
+| `app/robots.ts`, `app/sitemap.ts` | SEO crawler endpoints                                                  |
+| `components/LegalDocument.tsx`    | Shared legal page renderer                                             |
+| `components/StructuredData.tsx`   | JSON-LD structured data                                                |
+| `components/FiveOclockDeco/`      | Landing page UI components, hooks, data, styles, and Storybook stories |
+| `components/Countdown/`           | Time-zone and countdown helpers                                        |
+| `public/drinks/`                  | Drink images used by the countdown panels                              |
+| `public/flags/`                   | Flag assets keyed by country                                           |
+| `public/games/`                   | Game card images linking to table games                                |
+| `public/readme/`                  | README screenshots generated from the app                              |
+| `tests/e2e/`                      | Playwright smoke tests                                                 |
+| `.storybook/`                     | Storybook configuration                                                |
 
 ## Component Shape
 
@@ -89,7 +97,10 @@ The e2e suite currently verifies:
 - Game cards link to `https://games.theweekendisneverover.com`.
 - `/api/health` returns `{ "status": "ok" }`.
 - Placeholder `#` links are not present.
-- The newsletter field is keyboard-reachable and labelled.
+- The newsletter signup form is not visible until a real provider and privacy disclosure exist.
+- Privacy and Terms routes render and cross-link.
+- Robots and sitemap routes are available.
+- Production metadata, canonical URL, Open Graph image, and JSON-LD structured data render.
 - Static drink, flag, and game asset references resolve to files.
 - Desktop and mobile visual smoke screenshots can be captured.
 
@@ -110,6 +121,12 @@ Open `http://localhost:6006`.
 The site deploys on Vercel from this repository.
 
 The canonical branch is `main`. GitHub and Vercel both use `main` for production.
+
+## Legal And Email
+
+The footer intentionally does not include newsletter signup. Add it only after there is a real email provider, working mailbox routing, and an updated Privacy Policy.
+
+The Privacy and Terms pages list `privacy@theweekendisneverover.com` and `legal@theweekendisneverover.com`. The domain has Mailgun MX records, but mailbox routing should still be verified operationally before relying on those addresses for user workflows.
 
 ## Relationship To Table Games
 
