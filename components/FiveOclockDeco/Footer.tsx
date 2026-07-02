@@ -35,7 +35,7 @@ export function Footer() {
           </nav>
           <div className="footer-note">
             <p>No account needed. Play in seconds.</p>
-            <p>Newsletter signup will return only after email delivery and privacy disclosure are ready.</p>
+            <p>No newsletter, no inbox clutter.</p>
           </div>
         </div>
       </div>

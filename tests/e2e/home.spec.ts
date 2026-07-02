@@ -9,6 +9,10 @@ test.describe("homepage", () => {
     await expect(page.getByText(/countdown/i)).toBeVisible()
     await expect(page.getByText(/local drink of choice/i)).toBeVisible()
     await expect(page.getByRole("heading", { name: /game night/i })).toBeVisible()
+    await expect(page.getByRole("link", { name: "Start Game Night" })).toHaveAttribute(
+      "href",
+      "https://games.theweekendisneverover.com"
+    )
 
     await expect(page.locator(".game-title-link", { hasText: "Crazy Eights" })).toHaveAttribute(
       "href",

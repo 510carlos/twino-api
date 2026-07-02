@@ -97,7 +97,7 @@ The e2e suite currently verifies:
 - Game cards link to `https://games.theweekendisneverover.com`.
 - `/api/health` returns `{ "status": "ok" }`.
 - Placeholder `#` links are not present.
-- The newsletter signup form is not visible until a real provider and privacy disclosure exist.
+- The site does not expose a newsletter signup form.
 - Privacy and Terms routes render and cross-link.
 - Robots and sitemap routes are available.
 - Production metadata, canonical URL, Open Graph image, and JSON-LD structured data render.
@@ -124,7 +124,7 @@ The canonical branch is `main`. GitHub and Vercel both use `main` for production
 
 ## Legal And Email
 
-The footer intentionally does not include newsletter signup. Add it only after there is a real email provider, working mailbox routing, and an updated Privacy Policy.
+The footer intentionally does not include newsletter signup because this project does not currently offer or plan a newsletter.
 
 The Privacy and Terms pages list `theweekendisneverover@gmail.com`, which is the current working contact email. Domain-specific aliases such as `privacy@theweekendisneverover.com` or `legal@theweekendisneverover.com` should only be published after mailbox routing is configured and tested.
 

@@ -25,7 +25,7 @@ export default function PrivacyPage() {
           {
             title: "What We Collect",
             body: [
-              "The public website does not currently offer a newsletter signup, checkout, public account creation, or a contact form. If that changes, this policy should be updated before those features launch.",
+              "The public website does not offer a newsletter signup, checkout, public account creation, or a contact form.",
               "Like most websites, our hosting and security providers may process technical information such as IP address, browser type, device information, referring pages, pages viewed, and timestamps in server logs.",
             ],
           },

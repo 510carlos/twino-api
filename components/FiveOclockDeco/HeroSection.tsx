@@ -42,7 +42,7 @@ export function HeroSection({ location, digitRefs, timerRef }: HeroSectionProps)
 
       <div className="reveal-item">
         <a href={GAMES_URL} className="btn btn-primary">
-          Explore {cityName}&apos;s 5 o&apos;clock
+          Start Game Night
         </a>
         <svg
           className="scroll-cue"
