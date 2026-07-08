@@ -1,0 +1,74 @@
+/* --- Prefers Reduced Motion Fallbacks --- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .js .reveal-item {
+    opacity: 1;
+    transform: none;
+  }
+  .bg-sunburst {
+    animation: none;
+  }
+  .bg-sunburst-container,
+  .bg-sunburst-parallax {
+    transform: none !important;
+  }
+  .particles-container,
+  .scroll-cue {
+    display: none;
+  }
+  .metallic-text {
+    animation: none;
+    background-position: 0 0;
+  }
+  .panel-countdown {
+    animation: none;
+  }
+  .digit-col {
+    transition: none;
+  }
+  .game-card:hover {
+    transform: none;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
+  }
+}
+
+/* --- Port additions: pin with circle-flag image + scoped root --- */
+.pin-icon {
+  position: relative;
+}
+.pin-shape {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+.pin-flag {
+  position: absolute;
+  top: 13%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 0 0 2px var(--gold);
+}
+
+/* Game card title as link to its specific game */
+.game-title-link {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+.game-title-link:hover {
+  color: var(--gold-text);
+}
+.card-img-container {
+  cursor: pointer;
+}
